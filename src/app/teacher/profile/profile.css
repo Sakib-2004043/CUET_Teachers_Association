@@ -1,0 +1,94 @@
+/* Background customization */
+.profile-page {
+  background-color: #ffffff;
+  background-image: url('/background-image.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+.profile-header {
+  text-align: center;
+  background-color: #006400;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.home-link {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}
+
+/* Profile content layout */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Complaint form styling */
+.complaint-form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.complaint-input {
+  width: 100%;
+  max-width: 500px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+.submit-button {
+  background-color: #006400;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #004d00;
+}

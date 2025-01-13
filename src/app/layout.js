@@ -1,4 +1,5 @@
 import "./globals.css";
+import Link from "next/link";
 
 export const metadata = {
   title: "CUET Teachers Association",
@@ -9,7 +10,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <main>
+          {children}
+        </main>
+        <nav className="nav-bar">
+          <Link href="/vote" className="nav-link">
+            Vote
+          </Link>
+          <Link href="/schedule" className="nav-link">
+            Schedule
+          </Link>
+          <Link href="teacher/profile" className="nav-link">
+            Profile
+          </Link>
+          <Link href="teacher/event" className="nav-link">
+            event
+          </Link>
+        </nav>
       </body>
     </html>
   );
