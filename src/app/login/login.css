@@ -1,0 +1,87 @@
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('/go.jpg') no-repeat center center/cover;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field input {
+  padding: 10px 40px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Semi-transparent border */
+  border-radius: 5px;
+  width: 80%;
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent input background */
+  color: #000000;
+}
+
+.input-field input:focus {
+  outline: none;
+  border: 1px solid #007bff;
+}
+
+.input-field, .input-field{
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 12px;
+}
+
+.forgot-password a {
+  color: #0154ad;
+  text-decoration: none;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #003a77;
+  text-decoration: none;
+}

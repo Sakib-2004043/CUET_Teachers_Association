@@ -14,7 +14,7 @@ const Profile = () => {
       <div className="profile-content">
         <div className="profile-image">
           <img
-            src="/placeholder-profile.png"
+            src="/use.jpg"
             alt="Profile"
             className="profile-img"
           />
