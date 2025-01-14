@@ -1,0 +1,126 @@
+
+/* Background Image */
+.container {
+  background-image: url('/go1.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #333;
+
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(90deg, #4A148C, #6A1B9A);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(236, 242, 236); /* Make heading green */
+}
+
+.nav-bar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-bar ul li a:hover {
+  background-color: #6A1B9A;
+  color: #FFD54F;
+}
+
+/* Main Content */
+.main-content {
+  text-align: left;
+}
+
+/* Card Section */
+.card-container {
+  margin: 10px;
+  
+}
+
+.card {
+  background: linear-gradient(145deg, #FFFFFF, #E0E0E0);
+  border-radius: 12px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  width: 50%;
+  text-align: left; /* Align text inside the card to the left */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2), -6px -6px 15px rgba(255, 255, 255, 0.9);
+}
+
+.card h3 {
+  color: green; /* Make heading green */
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Archives Section */
+.archives {
+  margin: 10px;
+  text-align: left; /* Align text to the left */
+  background-color: #FFFFFF;
+  padding: 1rem;
+  border-radius: 20px;
+  width: 70%;
+}
+
+.archives h2 {
+  color: green; /* Make heading green */
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.archive-item {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.archive-item:hover {
+  transform: scale(1.02);
+}
+
+.archive-item h4 {
+  margin: 0 0 0.5rem;
+  color: green; /* Make heading green */
+  font-size: 1.2rem;
+}
+
+.archive-item p {
+  margin: 0.5rem 0;
+  color: #555;
+}

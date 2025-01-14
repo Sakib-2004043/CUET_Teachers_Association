@@ -1,7 +1,7 @@
 /* Page container */
 .page-container {
   font-family: Arial, sans-serif;
-  background-image: url('/bg-image.png'); /* Optional background image */
+  background-image: url('/login1.jpeg'); /* Optional background image */
   background-size: cover;
   background-position: center;
 }

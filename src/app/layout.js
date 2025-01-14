@@ -14,17 +14,17 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <nav className="nav-bar">
-          <Link href="/vote" className="nav-link">
+          <Link href="/teacher/vote" className="nav-link">
             Vote
           </Link>
-          <Link href="/schedule" className="nav-link">
+          <Link href="/teacher/schedule" className="nav-link">
             Schedule
           </Link>
-          <Link href="teacher/profile" className="nav-link">
+          <Link href="/teacher/profile" className="nav-link">
             Profile
           </Link>
-          <Link href="teacher/event" className="nav-link">
-            event
+          <Link href="/teacher/event" className="nav-link">
+            Event
           </Link>
         </nav>
       </body>
