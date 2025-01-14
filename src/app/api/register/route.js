@@ -14,7 +14,7 @@ export async function POST(req) {
     const email = body.get("email");
     const password = body.get("password");
     const department = body.get("department");
-    const mobile = body.get("mobile");
+    const mobile = body.get("phone");
     const file = body.get("profileImage"); // The uploaded file
 
     // Validate file existence
@@ -43,7 +43,7 @@ export async function POST(req) {
       department,
       mobile,
       role: "Member",
-      profileImage: imageBuffer, // Store image as buffer
+      profileImage: imageBuffer
     });
 
     console.log("Creating new user:", newUser);
@@ -63,5 +63,62 @@ export async function POST(req) {
       { error: "Failed to register user", details: error.message },
       { status: 500 }
     );
+  }
+}
+
+// Log In Part
+export async function PUT(req) {
+
+  try {
+    // Connect to the database
+    const JWT_SECRET = process.env.JWT_SECRET;
+
+    await connectDB();
+
+    // Parse the request body
+    const { email, password } = await req.json();
+
+    // Validate input
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 });
+    }
+
+    // Find user by email
+    const user = await userRegistrations.findOne({ email });
+    if (!user) {
+      return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
+    }
+
+    // Compare the password (Consider using bcrypt for secure password comparison)
+    const isPasswordValid = password === user.password; // Replace with bcrypt.compare in production
+    if (!isPasswordValid) {
+      return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        department: user.department,
+        mobile:user.mobile
+      },
+      JWT_SECRET,
+      { expiresIn: '1h' } // Token validity: 1 hour
+    );
+
+    // Respond with the token and user details
+    return NextResponse.json(
+      {
+        message: 'Login successful.',
+        token,
+        role: user.role
+      },{ status: 200 }
+    );
+  } catch (error) {
+    console.error('Error during login:', error);
+    return NextResponse.json({ error: 'Server error. Please try again later.' }, { status: 500 });
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import './home.css';
+import './teacher.css';
 
 export default function Home() {
   const archives = [
@@ -26,17 +26,7 @@ export default function Home() {
       <header className="header">
         <h1>CUET Teacher's Association</h1>
         <nav>
-          <ul className="nav-bar">
-            <li>
-              <Link href="/teacher/profile">Profile</Link>
-            </li>
-            <li>
-              <Link href="/register">Register</Link>
-            </li>
-            <li>
-              <Link href="/login">Log Out</Link>
-            </li>
-          </ul>
+          <Link href="/login">Log Out</Link>
         </nav>
       </header>
 

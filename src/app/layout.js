@@ -13,20 +13,6 @@ export default function RootLayout({ children }) {
         <main>
           {children}
         </main>
-        <nav className="nav-bar">
-          <Link href="/teacher/vote" className="nav-link">
-            Vote
-          </Link>
-          <Link href="/teacher/schedule" className="nav-link">
-            Schedule
-          </Link>
-          <Link href="/teacher/profile" className="nav-link">
-            Profile
-          </Link>
-          <Link href="/teacher/event" className="nav-link">
-            Event
-          </Link>
-        </nav>
       </body>
     </html>
   );
