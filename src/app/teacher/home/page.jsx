@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import './home.css';
 
 export default function Home() {
@@ -26,9 +27,15 @@ export default function Home() {
         <h1>CUET Teacher's Association</h1>
         <nav>
           <ul className="nav-bar">
-            <li><a href="teacher/profile">Profile</a></li>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/login">Log Out</a></li>
+            <li>
+              <Link href="/teacher/profile">Profile</Link>
+            </li>
+            <li>
+              <Link href="/register">Register</Link>
+            </li>
+            <li>
+              <Link href="/login">Log Out</Link>
+            </li>
           </ul>
         </nav>
       </header>

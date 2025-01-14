@@ -34,7 +34,8 @@
   padding: 0;
 }
 
-.nav-bar ul li a {
+.nav-bar {
+  background-color: #819a1b;
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -44,7 +45,7 @@
 }
 
 .nav-bar ul li a:hover {
-  background-color: #6A1B9A;
+  background-color: #819a1b;
   color: #FFD54F;
 }
 

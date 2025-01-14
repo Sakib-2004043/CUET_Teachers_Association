@@ -1,0 +1,59 @@
+/* Style for headers */
+.green-header {
+  color: green;
+}
+
+/* Additional styles for the form */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  background: url('/login1.jpeg') no-repeat center center/cover;
+}
+
+.form-box {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 400px;
+}
+
+form input {
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: darkgreen;
+}
+
+/* Styling for the login link */
+.login-link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-link a {
+  color: green;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
