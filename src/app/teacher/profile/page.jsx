@@ -20,8 +20,8 @@ const Profile = () => {
           />
         </div>
         <div className="profile-details">
-          <p><strong>Name:</strong> Saki Kowsar</p>
-          <p><strong>Email:</strong> Saki.Kowsar@gmail.com</p>
+          <p><strong>Name:</strong> Jhon Doe</p>
+          <p><strong>Email:</strong> john.doe@gmail.com</p>
           <p><strong>Department:</strong> Computer Science and Engineering</p>
           <p>
             <strong>Teaching Subjects:</strong> Software Engineering, Software
