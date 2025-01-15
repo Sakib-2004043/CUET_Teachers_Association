@@ -1,8 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 import './register.css';
+import { useRouter } from 'next/navigation';
 
 const SignUpForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,6 +43,7 @@ const SignUpForm = () => {
 
       if (response.ok) {
         alert('Registration successful!');
+        router.push('/login');
       } else {
         alert('Failed to register. Please try again.');
       }

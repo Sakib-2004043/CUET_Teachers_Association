@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode"; // Ensure you have this library installed
 import "./profile.css";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -16,6 +19,7 @@ const Profile = () => {
         try {
           // Decode the token
           const decodedToken = jwtDecode(token);
+          console.log(decodedToken)
 
           // Send POST request to fetch user details
           const response = await fetch('/api/profile', {
@@ -52,24 +56,23 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      <header className="profile-header">
-        <h1>Teacher Profile</h1>
-        <Link href="/" className="home-link">
-          Go To Home
-        </Link>
-      </header>
-
       <div className="profile-content">
+        <header className="profile-header">
+          <h1>Teacher Profile</h1>
+          <Link href="/" className="home-link">
+            Go To Home
+          </Link>
+        </header>
         <div className="profile-image">
           {profileImage ? (
             <img
               src={profileImage}
-              alt="Profile"
+              alt="/use"
               className="profile-img"
             />
           ) : (
             <img
-              src="/default-profile.jpg" // Fallback image
+              src="/use.jpg" // Fallback image
               alt="Default Profile"
               className="profile-img"
             />
@@ -82,6 +85,7 @@ const Profile = () => {
             <p><strong>Role:</strong> {userDetails.role}</p>
             <p><strong>Department:</strong> {userDetails.department}</p>
             <p><strong>Mobile:</strong> {userDetails.mobile}</p>
+            <button className="edit-button" onClick={() => router.push("/teacher/edit")}>Edit</button>
           </div>
         ) : (
           <p>Loading profile details...</p>
@@ -89,11 +93,11 @@ const Profile = () => {
       </div>
 
       <div className="complaint-form">
-        <h2>Make a Complaint</h2>
         <textarea
           placeholder="Enter your complaint here..."
           className="complaint-input"
         ></textarea>
+        <br />
         <button className="submit-button">Submit Complaint</button>
       </div>
     </div>
