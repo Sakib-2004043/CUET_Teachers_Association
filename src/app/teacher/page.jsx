@@ -26,7 +26,7 @@ export default function Home() {
       <header className="header">
         <h1>CUET Teacher's Association</h1>
         <nav>
-          <Link href="/login">Log Out</Link>
+          <Link href="/login" className='login-link'>Log Out</Link>
         </nav>
       </header>
 

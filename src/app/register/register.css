@@ -1,67 +1,168 @@
-/* Style for headers */
-.green-header {
-  color: green;
+/* General Form Container */
+body{
+  margin: 0px;
+  padding: 0px;
 }
-
-/* Additional styles for the form */
-.form-container {
+.sign-up-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-  background: url('/login1.jpeg') no-repeat center center/cover;
-}
-
-.form-box {
-  background-color: #fff;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  background-color: #e9f7e9; /* Soft light green background */
+  background: url('/login1.jpeg') no-repeat center center/cover fixed;
+}
+
+/* Form Box */
+.sign-up-form-box {
+  background-color: #ffffff; /* White background for contrast */
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-form input {
-  width: 94%;
-  padding: 10px;
+.sign-up-form-box:hover {
+  transform: scale(1.02); /* Slight scale on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Form Headers */
+.sign-up-header-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2e7d32; /* Dark green for titles */
   margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: darkgreen;
-}
-
-/* Styling for the login link */
-.login-link {
-  margin-top: 15px;
   text-align: center;
 }
 
-.login-link a {
-  color: green;
-  text-decoration: none;
+.sign-up-header-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #388e3c; /* Softer green for subtitles */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.login-link a:hover {
-  text-decoration: underline;
+/* Input Fields */
+.sign-up-input-name,
+.sign-up-input-email,
+.sign-up-input-department,
+.sign-up-input-phone,
+.sign-up-input-password,
+.sign-up-input-confirm-password,
+.sign-up-input-file {
+  width: 94%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #a5d6a7; /* Light green border */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #f1f8f1; /* Very light green background */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
-.image-preview {
-  margin-top: 15px;
+
+.sign-up-input-name:hover,
+.sign-up-input-email:hover,
+.sign-up-input-department:hover,
+.sign-up-input-phone:hover,
+.sign-up-input-password:hover,
+.sign-up-input-confirm-password:hover,
+.sign-up-input-file:hover {
+  background-color: #e8f5e9; /* Slightly darker green background on hover */
+}
+
+.sign-up-input-name:focus,
+.sign-up-input-email:focus,
+.sign-up-input-department:focus,
+.sign-up-input-phone:focus,
+.sign-up-input-password:focus,
+.sign-up-input-confirm-password:focus,
+.sign-up-input-file:focus {
+  border-color: #66bb6a; /* Darker green border on focus */
+  background-color: #ffffff; /* White background on focus */
+}
+
+/* Image Preview */
+.sign-up-image-preview {
+  margin: 10px;
   max-width: 100px;
   max-height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
+  border: 2px solid #a5d6a7; /* Light green border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sign-up-image-preview:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit Button */
+.sign-up-button-submit {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white; /* Text color */
+  background-color: #66bb6a; /* Light green background */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover Effect */
+.sign-up-button-submit:hover {
+  background-color: #388e3c; /* Darker green on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Increased shadow on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active State */
+.sign-up-button-submit:active {
+  background-color: #2e7d32; /* Even darker green on click */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Reduced shadow on click */
+  transform: translateY(1px); /* Slight press effect */
+}
+
+/* Disabled State */
+.sign-up-button-submit:disabled {
+  background-color: #a5d6a7; /* Muted green for disabled state */
+  cursor: not-allowed; /* Disable cursor */
+  opacity: 0.6;
+}
+
+
+/* Login Link Section */
+.sign-up-login-link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.sign-up-login-link p {
+  font-size: 0.9rem;
+  color: #388e3c; /* Soft green text */
+}
+
+/* Login Button Link */
+.sign-up-login-button {
+  font-weight: 600;
+  color: #66bb6a; /* Light green text */
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.sign-up-login-button:hover {
+  color: #2e7d32; /* Darker green on hover */
+  text-shadow: 0 2px 4px rgba(46, 125, 50, 0.4); /* Slight glow effect */
+}
+
+.sign-up-login-button:active {
+  color: #1b5e20; /* Even darker green on click */
+  text-shadow: none;
 }

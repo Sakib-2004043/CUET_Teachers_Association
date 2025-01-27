@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import './register.css';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -54,17 +55,18 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-box">
-        <h1 className="green-header">Welcome to CUET Teacher's Association</h1>
-        <h2 className="green-header">Complete Your Registration</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="sign-up-form-container">
+      <div className="sign-up-form-box">
+        <h1 className="sign-up-header-title">Welcome to CUET Teacher's Association</h1>
+        <h2 className="sign-up-header-subtitle">Complete Your Registration</h2>
+        <form onSubmit={handleSubmit} className="sign-up-form">
           <input
             type="text"
             name="name"
             placeholder="Name"
             value={formData.name}
             onChange={handleChange}
+            className="sign-up-input-name"
             required
           />
           <input
@@ -73,6 +75,7 @@ const SignUpForm = () => {
             placeholder="Your E-Mail"
             value={formData.email}
             onChange={handleChange}
+            className="sign-up-input-email"
             required
           />
           <input
@@ -81,6 +84,7 @@ const SignUpForm = () => {
             placeholder="Your Department"
             value={formData.department}
             onChange={handleChange}
+            className="sign-up-input-department"
             required
           />
           <input
@@ -89,6 +93,7 @@ const SignUpForm = () => {
             placeholder="Phone Number"
             value={formData.phone}
             onChange={handleChange}
+            className="sign-up-input-phone"
             required
           />
           <input
@@ -97,6 +102,7 @@ const SignUpForm = () => {
             placeholder="Set Password"
             value={formData.password}
             onChange={handleChange}
+            className="sign-up-input-password"
             required
           />
           <input
@@ -105,6 +111,7 @@ const SignUpForm = () => {
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
+            className="sign-up-input-confirm-password"
             required
           />
           <input
@@ -112,14 +119,29 @@ const SignUpForm = () => {
             name="profileImage"
             accept="image/*"
             onChange={handleFileChange}
+            className="sign-up-input-file"
             required
           />
-          {imagePreview && <img src={imagePreview} alt="Profile Preview" className="image-preview" />}
-          <button type="submit">Sign Up</button>
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Profile Preview"
+              className="sign-up-image-preview"
+            />
+          )}
+          <button type="submit" className="sign-up-button-submit">
+            Sign Up
+          </button>
         </form>
-        <div className="login-link">
+        <div className="sign-up-login-link">
           <p>
-            Already have an account? <a href="/login">Login here</a>
+            Already have an account?{' '}
+            <Link
+              href={"/login"}
+              className="sign-up-login-button"
+            >
+              Login here
+            </Link>
           </p>
         </div>
       </div>

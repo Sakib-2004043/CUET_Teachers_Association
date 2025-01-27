@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Correct router import for Next.js
-import './login.css';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import "./login.css"
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const router = useRouter(); // Initialize router instance
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,63 +25,84 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/register', {
-        method: 'PUT',
+      const response = await fetch("/api/register", {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         const data = await response.json();
-        alert('Login successful');
-        console.log('Response:', data);
-        localStorage.setItem("token",data.token)
-        router.push('/teacher'); // Redirect to the desired route
+        alert("🎉 Login successful! Welcome back!");
+        localStorage.setItem("token", data.token);
+        router.push("/teacher");
       } else {
         const errorData = await response.json();
-        alert(`Failed to log in: ${errorData.message}`);
+        alert(`⚠️ Failed to log in: ${errorData.message}`);
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error during login:", error);
+      alert("❌ An error occurred. Please try again.");
     }
+  };
+
+  const navigateToForgotPassword = () => {
+    router.push("/forgot-password");
+  };
+
+  const navigateToRegister = () => {
+    router.push("/register");
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Log In</h1>
+        <h1 className="login-title">🔑 Log In to Your Account</h1>
+        <p className="login-message">Welcome back! 🌟 Let's get you signed in. 😊</p>
         <form onSubmit={handleSubmit}>
-          <div className="input-field">
+          <div className="login-input-field">
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="📧 Email Address"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
-          <div className="input-field">
+          <div className="login-input-field">
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="🔒 Password"
               value={formData.password}
               onChange={handleChange}
               required
             />
           </div>
-          <div className="forgot-password">
-            <a href="#">Forgot Password?</a>
+          <div className="login-forgot-password">
+            <button
+              type="button"
+              className="login-link-button"
+              onClick={navigateToForgotPassword}
+            >
+              Forgot Password? 🤔
+            </button>
           </div>
-          <button type="submit">Log In</button>
+          <button type="submit" className="login-submit-button">🚀 Log In</button>
         </form>
-        <div className="register-link">
-          <p>
-            Don't Have Any Account? <a href="/register">Register</a>
+        <div className="login-register-link">
+          <p className="login-register-text">
+            Don’t have an account? 🤷‍♂️{" "}
+            <button
+              type="button"
+              className="login-link-button"
+              onClick={navigateToRegister}
+            >
+              Register Now! 📝
+            </button>
           </p>
         </div>
       </div>

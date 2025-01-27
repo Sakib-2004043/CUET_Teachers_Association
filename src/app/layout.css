@@ -1,0 +1,118 @@
+/* Root layout styles with light green professional theme */
+body{
+  margin: 0px;
+  padding: 0px;
+}
+/* Header Styles */
+.root-layout-header {
+  background: linear-gradient(135deg, #43db10, #094802);
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.root-layout-header-content {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.root-layout-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.root-layout-nav {
+  margin-top: 15px;
+}
+
+.root-layout-nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.root-layout-nav-link {
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.root-layout-nav-link:hover {
+  background-color: #56ab91;
+  transform: scale(1.05);
+}
+
+/* Main Styles */
+.root-layout-main {
+  min-height: calc(100vh - 160px); /* Adjusted for header and footer height */
+  background: linear-gradient(135deg, #f6fff8, #e0f7ec);
+}
+
+/* Footer Styles */
+.root-layout-footer {
+  background: linear-gradient(135deg, #0e6a3f, #043507); /* Light green and soft blue gradient */
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.root-layout-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.root-layout-footer-text {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.root-layout-footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.root-layout-footer-link {
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0a065e, #a60977); /* Gold to orange gradient */
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.root-layout-footer-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #a60977, #0a065e); /* Reverse gradient */
+}
+
+.root-layout-footer-text {
+  font-size: 0.9rem;
+  color: #f3f3f3;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.root-layout-footer-text:hover {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}

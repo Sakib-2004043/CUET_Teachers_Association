@@ -1,0 +1,234 @@
+/* Global Styles for All Landing Page */
+
+.all-land-container {
+  background: linear-gradient(135deg, #d4f8d4, #a4e2a4);
+  color: #054705;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Hero Section */
+.all-land-hero {
+  text-align: center;
+  padding: 50px 20px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  background-color: #e8fbe8;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.all-land-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.all-land-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.all-land-explore-button {
+  background-color: #88c888;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.all-land-explore-button:hover {
+  background-color: #6ab76a;
+  transform: scale(1.05);
+}
+
+/* About Us Section */
+.all-land-about {
+  background-color: #e8fbe8;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.all-land-section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.all-land-about-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.all-land-learn-more-button {
+  background-color: #88c888;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.all-land-learn-more-button:hover {
+  background-color: #6ab76a;
+  transform: scale(1.05);
+}
+
+/* Events Section */
+.all-land-events {
+  background-color: #e8fbe8;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.all-land-events-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.all-land-event-item {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.all-land-event-item:hover {
+  background-color: #d2f0d2;
+}
+
+.all-land-events-button {
+  background-color: #88c888;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.all-land-events-button:hover {
+  background-color: #6ab76a;
+  transform: scale(1.05);
+}
+
+/* Resources Section */
+.all-land-resources {
+  background-color: #e8fbe8;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.all-land-resources-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.all-land-resources-button {
+  background-color: #88c888;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.all-land-resources-button:hover {
+  background-color: #6ab76a;
+  transform: scale(1.05);
+}
+
+/* Testimonials Section */
+.all-land-testimonials {
+  background-color: #e8fbe8;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.all-land-testimonials-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.all-land-testimonial {
+  background-color: #d2f0d2;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.all-land-testimonial:hover {
+  transform: scale(1.05);
+}
+
+.all-land-testimonial-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.all-land-testimonial-author {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Call to Action Section */
+.all-land-cta {
+  background-color: #88c888;
+  color: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.all-land-cta-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.all-land-cta-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.all-land-cta-button {
+  background-color: #6ab76a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.all-land-cta-button:hover {
+  background-color: #4a9e4a;
+  transform: scale(1.1);
+}

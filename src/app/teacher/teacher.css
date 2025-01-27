@@ -56,7 +56,8 @@
 
 /* Card Section */
 .card-container {
-  margin: 10px;
+  padding: 20px;
+  margin: 20px;
   
 }
 
@@ -88,9 +89,10 @@
 
 /* Archives Section */
 .archives {
-  margin: 10px;
+  padding: 20px;
+  margin: 20px;
   text-align: left; /* Align text to the left */
-  background-color: #FFFFFF;
+  background-color: wheat;
   padding: 1rem;
   border-radius: 20px;
   width: 70%;
@@ -103,6 +105,8 @@
 }
 
 .archive-item {
+  padding: 20px;
+  margin: 20px;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   padding: 1rem 1.5rem;
@@ -124,4 +128,10 @@
 .archive-item p {
   margin: 0.5rem 0;
   color: #555;
+}
+.login-link{
+  padding: 10px;
+  color: white;
+  display: inline;
+  text-decoration: none; /* Ensure it stays inline with other elements */
 }
