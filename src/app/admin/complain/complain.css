@@ -1,80 +1,85 @@
-/* Admin Complaints Page Styling */
-.admin-complaints-page {
-  font-family: Arial, sans-serif;
+/* General Container for Complaints Page */
+.admin-comp-complaints-page {
   padding: 20px;
-  background-color: #f0fdf4; /* Light green background */
+  width: 60%;
+  font-family: 'Times New Roman', Times, serif;
 }
 
-.admin-complaints-title {
-  font-size: 24px;
-  color: #388e3c; /* Dark green for title */
-  margin-bottom: 20px;
+/* Card Styles for Each Section */
+.admin-comp-card {
+  background-color: #e7f9e7; /* Light green background */
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.complaints-list {
-  list-style: none;
+.admin-comp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Specific Styling for Each Card Type */
+.admin-comp-teacher-name-card{
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+/* Reply Card Styling */
+.admin-comp-reply-card {
+  background-color: #f0f9f0; /* Slightly lighter green */
+  padding: 20px;
+  border: 1px solid #d1e8d1;
+}
+
+.admin-comp-reply-input-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-comp-reply-input {
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  resize: none;
+  background-color: #fff;
+}
+
+.admin-comp-reply-input:focus {
+  border-color: #66bb6a;
+  outline: none;
+}
+
+.admin-comp-reply-submit-button {
+  background-color: #66bb6a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-comp-reply-submit-button:hover {
+  background-color: #4caf50;
+}
+
+/* List Styling */
+.admin-comp-complaints-list {
+  list-style-type: none;
   padding: 0;
 }
 
-.complaint-item {
-  background-color: #e8f5e9; /* Light green for each complaint */
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #c8e6c9; /* Slightly darker border */
+.admin-comp-complaint-item {
+  margin: 20px;
+  background-color: #baf5bb;
+  padding: 20px;
+  border-radius: 20px;
+
 }
 
-.complaint-teacher,
-.complaint-date,
-.complaint-text {
-  margin: 10px 0;
-}
-
-.complaint-label {
-  font-weight: bold;
-}
-
-.reply-section {
-  margin-top: 15px;
-}
-
-.reply-label {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.reply-text {
-  font-style: italic;
-  color: #388e3c; /* Green color for replies */
-}
-
-.reply-input-container {
-  margin-top: 10px;
-}
-
-.reply-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #a5d6a7; /* Light green border */
-  border-radius: 4px;
-  resize: vertical;
-}
-
-.reply-submit-button {
-  margin-top: 10px;
-  padding: 8px 15px;
-  background-color: #66bb6a; /* Green button */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.reply-submit-button:hover {
-  background-color: #388e3c; /* Darker green on hover */
-}
-
-.no-complaints-message {
-  color: #388e3c;
-  font-style: italic;
-}

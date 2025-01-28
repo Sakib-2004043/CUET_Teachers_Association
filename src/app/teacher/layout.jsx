@@ -21,16 +21,12 @@ export default function subLayout({ children }) {
     if (token) {
       try {
         const decodedData = jwtDecode(token);
-        console.log("Role:", decodedData.role);
 
-        if (decodedData.role == "Admin") {
+        if (decodedData.role === "Admin") {
           router.push("/admin");
-        }
-        else if(decodedData.role == "Member"){
-          router.push("/teacher")
-        }
-        else{
-          router.push("/")
+        } 
+        else if (decodedData.role !== "Member" && decodedData.role !== "Admin") {
+          router.push("/");
         }
       } catch (error) {
         console.error("Error decoding token:", error);

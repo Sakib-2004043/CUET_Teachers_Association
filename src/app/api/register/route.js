@@ -30,8 +30,6 @@ export async function POST(req) {
     const bufferData = await file.arrayBuffer();
     const imageBuffer = Buffer.from(bufferData);
 
-    console.log("Image buffer:", imageBuffer);
-
     // Ensure connection to the database
     await connectDB();
 
@@ -46,11 +44,8 @@ export async function POST(req) {
       profileImage: imageBuffer
     });
 
-    console.log("Creating new user:", newUser);
-
     // Save the user to the database
     const savedUser = await newUser.save();
-    console.log("User saved successfully:", savedUser);
 
     // Return success response
     return NextResponse.json(

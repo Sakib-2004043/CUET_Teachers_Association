@@ -43,7 +43,7 @@ const TeachersList = () => {
     const regex = new RegExp(`(${query})`, "gi"); // Create a case-insensitive regex to match the query
     return text.split(regex).map((part, index) =>
       part.toLowerCase() === query.toLowerCase() ? (
-        <span key={index} className="highlight">{part}</span>
+        <span key={index} className="admin-all-teacher-highlight">{part}</span>
       ) : (
         part
       )
@@ -75,11 +75,11 @@ const TeachersList = () => {
   }
 
   return (
-    <div className="teachers-list">
-      <h1>Teachers</h1>
+    <div className="admin-all-teacher-list">
+      <h1 className="admin-all-teacher-h1">Teachers List</h1>
       
       {/* Search Bar */}
-      <div className="search-bar">
+      <div className="admin-all-teacher-search-bar">
         <input
           type="text"
           placeholder="Search by any field..."
@@ -89,7 +89,7 @@ const TeachersList = () => {
       </div>
 
       {filteredTeachers.length > 0 ? (
-        <table className="teachers-table">
+        <table className="admin-all-teacher-table">
           <thead>
             <tr>
               <th>Profile</th>
@@ -110,10 +110,10 @@ const TeachersList = () => {
                       alt={`${teacher.name}'s profile`}
                       width={50} // Image width
                       height={50} // Image height
-                      className="teacher-profile-img"
+                      className="admin-all-teacher-profile-img"
                     />
                   ) : (
-                    <div className="teacher-profile-placeholder">No Image</div>
+                    <div className="admin-all-teacher-profile-placeholder">No Image</div>
                   )}
                 </td>
                 <td>{highlightText(teacher.name, searchQuery)}</td>

@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { formatDate } from "@/utils/dateFormat";
+
 import "./complain.css"
 
 const AdminComplaintsPage = () => {
@@ -84,46 +86,48 @@ const AdminComplaintsPage = () => {
     }
   };
 
+  // Sort complaints by date in descending order
+  const sortedComplaints = complaints.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   if (loading) return <p>Loading complaints...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="admin-complaints-page">
-      <h1>All Complaints</h1>
-      {complaints.length > 0 ? (
-        <ul className="complaints-list">
-          {complaints.map((complaint) => (
-            <li key={complaint._id} className="complaint-item">
-              <p>
+    <div className="admin-comp-complaints-page">
+      {sortedComplaints.length > 0 ? (
+        <ul className="admin-comp-complaints-list">
+          {sortedComplaints.map((complaint) => (
+            <li key={complaint._id} className="admin-comp-complaint-item">
+              <div className="admin-comp-card admin-comp-teacher-name-card">
                 <strong>Teacher Name:</strong> {complaint.teacherName}
-              </p>
-              <p>
-                <strong>Date:</strong> {new Date(complaint.date).toLocaleDateString()}
-              </p>
-              <p>
-                <strong>Complaint:</strong> {complaint.complain}
-              </p>
-              <div className="reply-section">
-                <p>
-                  <strong>Reply:</strong>{" "}
-                  {complaint.reply !== "Waiting For Reply......" ? (
-                    <span>{complaint.reply}</span>
-                  ) : (
-                    <>
-                      <textarea
-                        placeholder="Write your reply here..."
-                        className="reply-input"
-                        value={replyText[complaint._id] || ""}
-                        onChange={(e) =>
-                          handleReplyChange(complaint._id, e.target.value)
-                        }
-                      />
-                      <button onClick={() => handleReplySubmit(complaint._id)}>
-                        Submit
-                      </button>
-                    </>
-                  )}
-                </p>
+                <br /><br />
+                <strong>Date:</strong> {formatDate(complaint.date)}
+              </div>
+              <div className="admin-comp-card admin-comp-complaint-card">
+                <strong>Complaint:<br/><hr/></strong> {complaint.complain}
+              </div>
+              <div className="admin-comp-card admin-comp-reply-card">
+                <strong>Reply:<br/><hr/></strong>
+                {complaint.reply !== "Waiting For Reply......" ? (
+                  <span>{complaint.reply}</span>
+                ) : (
+                  <div className="admin-comp-reply-input-container">
+                    <textarea
+                      placeholder="Write your reply here..."
+                      className="admin-comp-reply-input"
+                      value={replyText[complaint._id] || ""}
+                      onChange={(e) =>
+                        handleReplyChange(complaint._id, e.target.value)
+                      }
+                    />
+                    <button
+                      className="admin-comp-reply-submit-button"
+                      onClick={() => handleReplySubmit(complaint._id)}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
               </div>
             </li>
           ))}
@@ -133,6 +137,8 @@ const AdminComplaintsPage = () => {
       )}
     </div>
   );
+  
+  
 };
 
 export default AdminComplaintsPage;

@@ -17,7 +17,6 @@ export async function POST(req) {
     // Verify the token using your secret key
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log("Decode : ",decoded)
 
     // If token is valid, respond with success
     return NextResponse.json(

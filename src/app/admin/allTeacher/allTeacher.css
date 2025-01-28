@@ -1,82 +1,121 @@
-/* Container for the entire teachers list */
-.teachers-list {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+/* General Layout */
+.admin-all-teacher-list {
+  padding: 2rem;
+  background-color: #f1f8f6; /* Light green background for the page */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Heading */
+.admin-all-teacher-h1 {
+  color: #2e7d32; /* Dark green */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 /* Search Bar */
-.search-bar {
-  margin-bottom: 20px;
-  text-align: center;
+.admin-all-teacher-search-bar {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
 }
 
-.search-bar input {
-  padding: 8px;
+.admin-all-teacher-search-bar input {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.search-bar input:focus {
-  border-color: #007BFF; /* Change border color on focus */
+  max-width: 800px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #a5d6a7; /* Light green border */
+  border-radius: 10px;
+  background-color: #ffffff;
   outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Table styling */
-.teachers-table {
+.admin-all-teacher-search-bar input:focus {
+  border-color: #66bb6a; /* Darker green on focus */
+  box-shadow: 0 0 10px rgba(102, 187, 106, 0.4); /* Green glow */
+}
+
+/* Table Styling */
+.admin-all-teacher-table {
   width: 100%;
+  font-weight: bolder;
   border-collapse: collapse;
-  margin-top: 20px;
+  background-color: #ffffff; /* White table background */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.teachers-table th,
-.teachers-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
+.admin-all-teacher-table th,
+.admin-all-teacher-table td {
+  padding: 1rem;
   text-align: left;
-  vertical-align: middle;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0; /* Light gray borders */
 }
 
-.teachers-table th {
-  background-color: #f4f4f4;
-  color: #333;
+.admin-all-teacher-table th {
+  background-color: #66bb6a; /* Light green for header */
+  color: #ffffff; /* White text for header */
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.teachers-table td {
-  background-color: #fff;
-  color: #555;
+.admin-all-teacher-table td {
+  background-color: #f9fdf9; /* Very light green for rows */
+  color: #333333; /* Dark gray text */
 }
 
-.teachers-table tr:hover td {
-  background-color: #f1f1f1;
-  transition: background-color 0.3s ease;
+.admin-all-teacher-table tr:hover td {
+  background-color: #e8f5e9; /* Hover effect for rows */
+  transition: background-color 0.3s;
 }
 
-/* Styling for teacher profile images */
-.teacher-profile-img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
+/* Profile Image */
+.admin-all-teacher-profile-img {
+  border-radius: 50%; /* Circular profile images */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for images */
 }
 
-.teacher-profile-placeholder {
-  background-color: #e0e0e0;
+.admin-all-teacher-profile-placeholder {
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #777;
+  font-size: 0.8rem;
+  color: #555555;
+  background-color: #c8e6c9; /* Light green placeholder */
   border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.highlight {
-  background-color: yellow; /* or any other color you prefer */
+/* Highlighted Text */
+.admin-all-teacher-highlight {
+  background-color: #ffecb3; /* Light yellow highlight */
+  color: #2e7d32; /* Dark green text */
   font-weight: bold;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+/* No Teachers Found */
+.admin-all-teacher-list p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e53935; /* Red text for no results */
+  margin-top: 2rem;
+}
+
+/* Smooth Hover Transitions */
+.admin-all-teacher-table tr {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.admin-all-teacher-table tr:hover {
+  transform: scale(1.01); /* Slight zoom on hover */
 }

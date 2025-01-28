@@ -29,11 +29,10 @@ export default function AdminLandSubLayout({ children }) {
         const decodedData = jwtDecode(token);
         console.log("Role:", decodedData.role);
 
-        if (decodedData.role === "Admin") {
-          router.push("/admin");
-        } else if (decodedData.role === "Member") {
+        if (decodedData.role === "Member") {
           router.push("/teacher");
-        } else {
+        } 
+        else if (decodedData.role !== "Member" && decodedData.role !== "Admin") {
           router.push("/");
         }
       } catch (error) {
@@ -49,19 +48,38 @@ export default function AdminLandSubLayout({ children }) {
   return (
     <div className="admin-layout-container">
       {/* Admin Header */}
-      <header className="admin-layout-header">
+      <div className="admin-layout-header">
         <div className="admin-layout-header-left">
           <Image
             src="/CuetLogo.png"
             alt="CUET Teachers Association Logo"
             width={50}
             height={50}
-            className="logo"
+            style={{height:"auto",width:"auto"}}
+            className="admin-layout-cuet-logo"
             onClick={() => router.push("/")}
           />
-          <h1 className="admin-layout-header-title">🛠️ CUET TA Admin Dashboard</h1>
         </div>
-
+        <div className="admin-layout-header-center">
+          <h1 className="admin-layout-header-title">🛠️ CUET Teachers Association Admin Dashboard</h1>
+        </div>
+        <div className="admin-layout-header-right">
+          <Image
+            src="/bell.png"
+            alt="Notifications"
+            width={50}
+            height={50}
+            className="admin-layout-bell-icon"
+            onClick={() => router.push("/admin/complain")}
+          />
+          <button className="admin-layout-logout-btn" onClick={handleLogOut}>
+            Log Out
+          </button>
+        </div>
+      </div>
+      
+      {/* Navigation Menu */}
+      <div className="admin-layout-nav-container">
         <nav className="admin-layout-nav">
           <ul className="admin-layout-nav-list">
             <li className="admin-layout-nav-item">
@@ -86,22 +104,8 @@ export default function AdminLandSubLayout({ children }) {
             </li>
           </ul>
         </nav>
-
-        <div className="admin-layout-header-right">
-          <Image
-            src="/bell.png"
-            alt="Notifications"
-            width={50}
-            height={50}
-            className="admin-layout-bell-icon"
-            onClick={() => router.push("/admin/complain")}
-          />
-          <button className="admin-layout-logout-btn" onClick={handleLogOut}>
-            Log Out
-          </button>
-        </div>
-      </header>
-
+      </div>
+      
       {/* Main Content */}
       <main className="admin-layout-main">{children}</main>
     </div>

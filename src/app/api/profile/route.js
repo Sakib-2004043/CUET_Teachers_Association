@@ -115,8 +115,6 @@ export async function PUT(req) {
     const oldPassword = formData.get("oldPassword");
     const newPassword = formData.get("newPassword");
 
-    console.log("Extracted data:", { name, department, mobile, oldPassword, newPassword });
-
     // Handle the profile image if uploaded
     const profileImage = formData.get("profileImage");
 
@@ -162,8 +160,6 @@ export async function PUT(req) {
 
     // Save the updated user information to the database
     const updatedUser = await user.save();
-
-    console.log("User updated successfully:", updatedUser);
 
     // Return the success response with the updated user details
     return NextResponse.json(
