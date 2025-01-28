@@ -1,9 +1,7 @@
 /* General styles */
 body {
-  background: url('/go.jpg') no-repeat center center/cover;
-
   font-family: Arial, sans-serif;
-  color: #2d4739;
+  color: #7feab1;
   margin: 0;
   padding: 0;
 }
@@ -20,13 +18,11 @@ body {
 
 /* Login card */
 .login-box {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 100%;
+  min-width: 500px;
   max-width: 400px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -39,14 +35,12 @@ body {
 /* Title */
 .login-title {
   font-size: 2rem;
-  color: #145a32;
   margin-bottom: 10px;
 }
 
 /* Message */
 .login-message {
   font-size: 1rem;
-  color: #2d4739;
   margin-bottom: 20px;
 }
 
@@ -56,7 +50,7 @@ body {
 }
 
 .login-input-field input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 2px solid #2d4739;
   border-radius: 8px;
@@ -72,50 +66,73 @@ body {
   outline: none;
 }
 
-/* Buttons */
-.login-link-button,
+/* Primary Button (e.g., Log In button) */
 .login-submit-button {
-  background: #58b368;
+  background: #58b368; /* Light green */
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px 15px;
   font-size: 1rem;
   cursor: pointer;
+  width: 200px;
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.login-link-button:hover,
 .login-submit-button:hover {
-  background: #145a32;
+  background: #3e8b50; /* Slightly darker green */
+  transform: scale(1.05);
+}
+
+.login-submit-button:active {
+  background: #145a32; /* Dark green */
+  transform: scale(1);
+}
+
+/* Secondary Button (e.g., Forgot Password button) */
+.login-register-link-button {
+  background: #f8fcfa; /* Soft white with a green tint */
+  color: #145a32; /* Dark green */
+  border: 2px solid #58b368; /* Green border */
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.login-register-link-button:hover {
+  color: #fff;
+  background: #58b368;
+  border-color: #3e8b50;
   transform: translateY(-3px);
 }
 
-.login-link-button:active,
-.login-submit-button:active {
+.login-register-link-button:active {
+  background: #145a32;
+  border-color: #145a32;
   transform: translateY(1px);
 }
 
-/* Forgot password link */
-.login-forgot-password {
-  margin-bottom: 20px;
-}
-
-/* Register link */
-.login-register-link {
-  margin-top: 15px;
-}
-
-.login-register-text {
-  font-size: 0.9rem;
-}
-
-.login-register-text .login-link-button {
+/* Tertiary Button (e.g., Register link button) */
+.login-forgot-password .login-link-button {
+  background: transparent; /* No background */
+  color: #f70808; /* Dark green */
+  border: none;
+  font-size: 1rem;
   text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  margin-left: 300px;
+  font-weight: bolder;
 }
 
-/* Adjustments for better readability on the background */
-::selection {
-  background: #58b368;
-  color: #fff;
+.login-forgot-password .login-link-button:hover {
+  color: #832715; /* Light green */
+  transform: scale(1.1);
+}
+
+.login-forgot-password .login-link-button:active {
+  color: #3e8b50; /* Slightly darker green */
+  transform: scale(1);
 }

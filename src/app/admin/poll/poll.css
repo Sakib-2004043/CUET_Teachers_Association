@@ -1,0 +1,138 @@
+.admin-poll-container {
+  background-color: #f0fff4; /* Light green background */
+  border: 1px solid #c6f6d5; /* Soft green border */
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1); /* Light shadow */
+  font-family: Arial, sans-serif;
+}
+
+.admin-poll-title {
+  text-align: center;
+  color: #2f855a; /* Dark green */
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.admin-poll-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-poll-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-poll-label {
+  margin-bottom: 5px;
+  color: #276749; /* Medium green */
+  font-weight: bold;
+}
+
+.admin-poll-input,
+.admin-poll-select {
+  padding: 10px;
+  border: 1px solid #c6f6d5; /* Soft green border */
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  background-color: #ffffff; /* White background */
+  transition: border-color 0.3s ease-in-out;
+}
+
+.admin-poll-input:focus,
+.admin-poll-select:focus {
+  border-color: #38a169; /* Highlighted green border on focus */
+  box-shadow: 0 0 4px rgba(72, 187, 120, 0.4); /* Light green glow */
+}
+
+.admin-poll-submit {
+  padding: 10px 20px;
+  background-color: #48bb78; /* Bright green */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.admin-poll-submit:hover {
+  background-color: #38a169; /* Darker green on hover */
+}
+
+.admin-poll-submit:active {
+  background-color: #2f855a; /* Even darker green on click */
+}
+
+.admin-poll-submit:disabled {
+  background-color: #c6f6d5; /* Disabled button light green */
+  cursor: not-allowed;
+}
+
+.admin-poll-list {
+  background-color: #f0f8f0; /* Light green background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-poll-subtitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #38755b; /* Darker green for the title */
+  margin-bottom: 15px;
+}
+
+.admin-poll-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-poll-item {
+  background-color: #e8f5e9; /* Very light green for each item */
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-poll-item:hover {
+  background-color: #d0f0c0; /* Slightly darker green on hover */
+}
+
+.admin-poll-item-title {
+  font-size: 1.5rem;
+  color: #2e7d32; /* Darker green for the poll title */
+  margin-bottom: 10px;
+}
+
+.admin-poll-item-date,
+.admin-poll-item-status {
+  font-size: 1rem;
+  color: #4caf50; /* Green color for the date and status */
+}
+
+.admin-poll-item-status.open {
+  color: #388e3c; /* Green for open status */
+}
+
+.admin-poll-item-status.closed {
+  color: #c62828; /* Red for closed status */
+}
+
+.admin-poll-empty {
+  font-size: 1.2rem;
+  color: #bdbdbd; /* Light gray for the empty state text */
+  text-align: center;
+  margin-top: 20px;
+}
+
