@@ -8,6 +8,7 @@ const CreatePoll = () => {
   const [lastDate, setLastDate] = useState(""); // Poll deadline
   const [status, setStatus] = useState("open"); // Poll status
   const [polls, setPolls] = useState([]); // State to store all polls
+  const [selectedPoll, setSelectedPoll] = useState(null); // State for selected poll details
 
   // Fetch all polls from the API
   const fetchPolls = async () => {
@@ -17,7 +18,7 @@ const CreatePoll = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      setPolls(data.polls); // Update the polls state
+      setPolls(data.polls);
     } catch (error) {
       console.error("Error fetching polls:", error);
     }
@@ -61,6 +62,11 @@ const CreatePoll = () => {
     } catch (error) {
       console.error("Error creating poll:", error);
     }
+  };
+
+  // Handle view details button click
+  const handleViewDetails = (poll) => {
+    setSelectedPoll(poll); // Set the selected poll to display its details
   };
 
   return (
@@ -152,6 +158,14 @@ const CreatePoll = () => {
                 <p className={`admin-poll-item-status ${poll.status}`}>
                   Status: {poll.status}
                 </p>
+
+                {/* View Details Button */}
+                <button
+                  className="admin-poll-view-details"
+                  onClick={() => handleViewDetails(poll)}
+                >
+                  View Details
+                </button>
               </li>
             ))}
           </ul>
@@ -159,6 +173,36 @@ const CreatePoll = () => {
           <p className="admin-poll-empty">No polls available.</p>
         )}
       </div>
+
+      {/* Display Poll Details */}
+      {selectedPoll && (
+        <div className="admin-poll-details">
+          <h2 className="admin-poll-details-title">Poll Details</h2>
+          <h3>{selectedPoll.title}</h3>
+          <p>{selectedPoll.description}</p>
+          <p>Deadline: {new Date(selectedPoll.lastDate).toLocaleDateString()}</p>
+          <p>Status: {selectedPoll.status}</p>
+
+          <h4>Votes</h4>
+          <p>
+            <strong>Yes Votes:</strong> {selectedPoll.yesVote ? selectedPoll.yesVote.length : 0}
+          </p>
+          <ul>
+            {selectedPoll.yesVote && selectedPoll.yesVote.map((vote, index) => (
+              <li key={index}>{vote}</li>
+            ))}
+          </ul>
+
+          <p>
+            <strong>No Votes:</strong> {selectedPoll.noVote ? selectedPoll.noVote.length : 0}
+          </p>
+          <ul>
+            {selectedPoll.noVote && selectedPoll.noVote.map((vote, index) => (
+              <li key={index}>{vote}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

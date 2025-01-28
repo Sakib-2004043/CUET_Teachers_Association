@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation";
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
-  const [complaint, setComplaint] = useState("");  // State for complaint text
+  const [complaint, setComplaint] = useState(""); // State for complaint text
+  const [previousComplaints, setPreviousComplaints] = useState([]); // State for previous complaints
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +20,6 @@ const Profile = () => {
         try {
           // Decode the token
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
 
           // Send POST request to fetch user details
           const response = await fetch('/api/profile', {
@@ -40,6 +40,9 @@ const Profile = () => {
               const base64Image = Buffer.from(data.profileImage).toString('base64');
               setProfileImage(`data:image/jpeg;base64,${base64Image}`);
             }
+
+            // Fetch previous complaints for the teacher
+            await fetchPreviousComplaints(data.name);
           } else {
             console.error("Failed to fetch profile data:", response.statusText);
           }
@@ -54,15 +57,40 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
+  // Function to fetch previous complaints
+  const fetchPreviousComplaints = async (teacherName) => {
+    const token = localStorage.getItem("token");
+
+    if (token && teacherName) {
+      try {
+        const response = await fetch('/api/complain', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ teacherName }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setPreviousComplaints(data.complaints); 
+          console.log(data)
+        } else {
+          console.error("Failed to fetch previous complaints:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching previous complaints:", error);
+      }
+    }
+  };
+
   // Handle complaint submission
   const handleComplaintSubmit = async () => {
     const token = localStorage.getItem("token");
 
     if (token && complaint) {
       try {
-        // Decode token to get user information (optional)
-        const decodedToken = jwtDecode(token);
-
         // Send POST request to submit complaint
         const response = await fetch('/api/complain', {
           method: 'POST',
@@ -77,9 +105,11 @@ const Profile = () => {
         });
 
         if (response.ok) {
-          const data = await response.json();
           alert("Complaint submitted successfully!");
           setComplaint(""); // Clear the input field after submission
+
+          // Refresh the list of previous complaints
+          await fetchPreviousComplaints(userDetails.name);
         } else {
           console.error("Failed to submit complaint:", response.statusText);
         }
@@ -87,7 +117,7 @@ const Profile = () => {
         console.error("Error submitting complaint:", error);
       }
     } else {
-      alert("Please fill in both the teacher's name and the complaint text.");
+      alert("Please fill in the complaint text.");
     }
   };
 
@@ -104,7 +134,7 @@ const Profile = () => {
           {profileImage ? (
             <img
               src={profileImage}
-              alt="/use"
+              alt="Profile"
               className="profile-img"
             />
           ) : (
@@ -129,15 +159,36 @@ const Profile = () => {
         )}
       </div>
 
-      <div className="complaint-form">
-        <textarea
-          placeholder="Enter your complaint here..."
-          className="complaint-input"
-          value={complaint}
-          onChange={(e) => setComplaint(e.target.value)} // Update complaint state
-        ></textarea>
-        <br />
-        <button className="submit-button" onClick={handleComplaintSubmit}>Submit Complaint</button>
+      <div className="complaint-section">
+        <div className="complaint-form">
+          <textarea
+            placeholder="Enter your complaint here..."
+            className="complaint-input"
+            value={complaint}
+            onChange={(e) => setComplaint(e.target.value)}
+          ></textarea>
+          <br />
+          <button className="submit-button" onClick={handleComplaintSubmit}>Submit Complaint</button>
+        </div>
+
+        <div className="previous-complaints">
+          <h2>Previous Complaints</h2>
+          {previousComplaints.length > 0 ? (
+            <ul>
+              {previousComplaints.map((complain, index) => (
+                <li key={index} className="complaint-item">
+                  <p><strong>Date:</strong> {new Date(complain.date).toLocaleDateString()}</p>
+                  <p><strong>Complaint:</strong> {complain.complain}</p>
+                  {complain.reply && (
+                    <p><strong>Reply:</strong> {complain.reply}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No previous complaints found.</p>
+          )}
+        </div>
       </div>
     </div>
   );

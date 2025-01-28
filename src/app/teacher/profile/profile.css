@@ -139,3 +139,56 @@
   background-color: #218838; /* Darker green on hover */
   transform: translateY(-2px); /* Slight lift on hover */
 }
+
+.previous-complaints {
+  margin-top: 20px; /* Space from the section above */
+  padding: 16px; /* Add padding for spacing */
+  background-color: #f5f5f5; /* Light background for the section */
+  border-radius: 10px; /* Rounded corners for the section */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+}
+
+.previous-complaints h2 {
+  font-size: 1.5rem; /* Larger font size for heading */
+  color: #333; /* Dark text for heading */
+  border-bottom: 2px solid #d4f5d4; /* Light green underline for heading */
+  padding-bottom: 8px; /* Space below heading */
+  margin-bottom: 16px; /* Space after heading */
+}
+
+.previous-complaints ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.complaint-item {
+  background-color: #f9f9f9; /* Light gray background for each item */
+  border: 1px solid #e0e0e0; /* Light border around each item */
+  border-radius: 8px; /* Rounded corners */
+  padding: 12px; /* Inner padding for content */
+  margin-bottom: 10px; /* Space between items */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.complaint-item:hover {
+  background-color: #d4f5d4; /* Light green background on hover */
+  transform: translateY(-4px); /* Slight lift effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+}
+
+.complaint-item p {
+  margin: 6px 0; /* Space between paragraphs */
+  font-size: 1rem; /* Standard font size */
+  color: #555; /* Gray color for text */
+}
+
+.complaint-item p strong {
+  color: #333; /* Slightly darker text for labels (e.g., Date, Complaint, Reply) */
+}
+
+.no-complaints {
+  text-align: center; /* Center the text */
+  color: #999; /* Gray color for the no complaints text */
+  font-size: 1rem; /* Standard font size */
+  margin-top: 20px; /* Space from the heading */
+}

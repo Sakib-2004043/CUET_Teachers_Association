@@ -15,7 +15,7 @@ const complainSchema = new mongoose.Schema({
   },
   reply: {
     type: String,
-    default: null
+    default: "Waiting For Reply......"
   }
 });
 

@@ -2,8 +2,37 @@ import { NextResponse } from "next/server";
 import userRegistrations from "@/Database/models/register"; // Mongoose User model
 import connectDB from "@/Database/connectDB";
 import jwt from 'jsonwebtoken';
-require('dotenv').config()
+require('dotenv').config();
 
+export async function GET(req) {
+  try {
+    // Connect to the database
+    await connectDB();
+
+    // Retrieve the user data from the database
+    const user = await userRegistrations.find({});
+
+    // Check if the user exists
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    // Return the user data (excluding sensitive information like password)
+    return NextResponse.json(
+      { "Data": user},
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error retrieving user data:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req) {
   try {
