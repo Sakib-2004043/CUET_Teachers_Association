@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
-
+  const [complaint, setComplaint] = useState("");  // State for complaint text
   const router = useRouter();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Profile = () => {
         try {
           // Decode the token
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken)
+          console.log(decodedToken);
 
           // Send POST request to fetch user details
           const response = await fetch('/api/profile', {
@@ -53,6 +53,43 @@ const Profile = () => {
 
     fetchProfile();
   }, []);
+
+  // Handle complaint submission
+  const handleComplaintSubmit = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token && complaint) {
+      try {
+        // Decode token to get user information (optional)
+        const decodedToken = jwtDecode(token);
+
+        // Send POST request to submit complaint
+        const response = await fetch('/api/complain', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            teacherName: userDetails.name,
+            complain: complaint,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          alert("Complaint submitted successfully!");
+          setComplaint(""); // Clear the input field after submission
+        } else {
+          console.error("Failed to submit complaint:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error submitting complaint:", error);
+      }
+    } else {
+      alert("Please fill in both the teacher's name and the complaint text.");
+    }
+  };
 
   return (
     <div className="profile-page">
@@ -96,9 +133,11 @@ const Profile = () => {
         <textarea
           placeholder="Enter your complaint here..."
           className="complaint-input"
+          value={complaint}
+          onChange={(e) => setComplaint(e.target.value)} // Update complaint state
         ></textarea>
         <br />
-        <button className="submit-button">Submit Complaint</button>
+        <button className="submit-button" onClick={handleComplaintSubmit}>Submit Complaint</button>
       </div>
     </div>
   );
