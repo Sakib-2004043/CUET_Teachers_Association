@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const PollSchema = new mongoose.Schema({
-  topic: {
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },

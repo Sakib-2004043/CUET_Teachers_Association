@@ -1,0 +1,116 @@
+.teacher-poll-page-container {
+  padding: 20px;
+  background-color: #e9f7e9; /* Light green background */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.1); /* Subtle green shadow */
+  background-image: url('/login1.jpeg'); /* Optional background image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.teacher-poll-page-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2d6a4f; /* Dark green title color */
+  text-align: center;
+}
+
+.teacher-poll-list {
+  list-style: none;
+  padding: 0;
+}
+
+.teacher-poll-item {
+  background: #ffffff; /* White background for each poll */
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #b7e4c7; /* Light green border */
+  box-shadow: 0 2px 6px rgba(0, 128, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.teacher-poll-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.teacher-poll-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #1b4332; /* Deep green for poll titles */
+}
+
+.teacher-poll-description {
+  font-size: 1rem;
+  color: #2d6a4f; /* Slightly lighter green for descriptions */
+  margin: 10px 0;
+}
+
+.teacher-poll-deadline {
+  font-size: 0.9rem;
+  color: #40916c; /* Medium green for deadlines */
+  margin-bottom: 10px;
+}
+
+.teacher-poll-status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.teacher-poll-status-open {
+  background-color: #74c69d; /* Soft green for open polls */
+  color: white;
+}
+
+.teacher-poll-status-closed {
+  background-color: #95d5b2; /* Pale green for closed polls */
+  color: white;
+}
+
+.teacher-poll-vote-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.teacher-poll-agree-button,
+.teacher-poll-disagree-button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.teacher-poll-agree-button {
+  background-color: #2d6a4f; /* Deep green for Agree */
+  color: white;
+}
+
+.teacher-poll-agree-button:hover {
+  background-color: #1b4332;
+  transform: translateY(-2px); /* Slight hover lift */
+}
+
+.teacher-poll-disagree-button {
+  background-color: #95d5b2; /* Soft pale green for Disagree */
+  color: white;
+}
+
+.teacher-poll-disagree-button:hover {
+  background-color: #74c69d;
+  transform: translateY(-2px); /* Slight hover lift */
+}
+
+.teacher-poll-empty {
+  font-size: 1rem;
+  color: #2d6a4f; /* Calm green for empty state */
+  text-align: center;
+}

@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import "./poll.css";
 
 const CreatePoll = () => {
-  const [topic, setTopic] = useState("");
-  const [lastDate, setLastDate] = useState("");
-  const [status, setStatus] = useState("open");
+  const [title, setTitle] = useState(""); // Poll title
+  const [description, setDescription] = useState(""); // Poll description
+  const [lastDate, setLastDate] = useState(""); // Poll deadline
+  const [status, setStatus] = useState("open"); // Poll status
   const [polls, setPolls] = useState([]); // State to store all polls
 
   // Fetch all polls from the API
@@ -31,7 +32,8 @@ const CreatePoll = () => {
     e.preventDefault();
 
     const pollData = {
-      topic,
+      title,
+      description,
       lastDate,
       status,
     };
@@ -52,6 +54,10 @@ const CreatePoll = () => {
       const data = await response.json();
       console.log("Poll created successfully:", data);
       fetchPolls(); // Refresh the list of polls after creation
+      setTitle("");
+      setDescription("");
+      setLastDate("");
+      setStatus("open");
     } catch (error) {
       console.error("Error creating poll:", error);
     }
@@ -61,18 +67,33 @@ const CreatePoll = () => {
     <div className="admin-poll-container">
       <h1 className="admin-poll-title">Create a New Poll</h1>
       <form className="admin-poll-form" onSubmit={handleSubmit}>
-        {/* Poll Topic */}
+        {/* Poll Title */}
         <div className="admin-poll-field">
-          <label htmlFor="topic" className="admin-poll-label">
-            Poll Topic:
+          <label htmlFor="title" className="admin-poll-label">
+            Poll Title:
           </label>
           <input
             type="text"
-            id="topic"
+            id="title"
             className="admin-poll-input"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            placeholder="Enter the poll topic"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter the poll title"
+            required
+          />
+        </div>
+
+        {/* Poll Description */}
+        <div className="admin-poll-field">
+          <label htmlFor="description" className="admin-poll-label">
+            Poll Description:
+          </label>
+          <textarea
+            id="description"
+            className="admin-poll-input"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter the poll description"
             required
           />
         </div>
@@ -121,7 +142,10 @@ const CreatePoll = () => {
           <ul className="admin-poll-items">
             {polls.map((poll) => (
               <li key={poll._id} className="admin-poll-item">
-                <h3 className="admin-poll-item-title">{poll.topic}</h3>
+                <h3 className="admin-poll-item-title">{poll.title}</h3>
+                <p className="admin-poll-item-description">
+                  {poll.description}
+                </p>
                 <p className="admin-poll-item-date">
                   Deadline: {new Date(poll.lastDate).toLocaleDateString()}
                 </p>

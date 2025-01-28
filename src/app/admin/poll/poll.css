@@ -76,63 +76,85 @@
 }
 
 .admin-poll-list {
-  background-color: #f0f8f0; /* Light green background */
+  margin-top: 20px;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #f7fff5; /* Light green background for the list */
+  border: 1px solid #d4e9d4; /* Light green border */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-poll-subtitle {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #38755b; /* Darker green for the title */
-  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c662d; /* Dark green title */
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .admin-poll-items {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .admin-poll-item {
-  background-color: #e8f5e9; /* Very light green for each item */
-  border: 1px solid #c8e6c9;
-  border-radius: 8px;
-  margin-bottom: 10px;
   padding: 15px;
-  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+  background-color: #e8fce8; /* Slightly darker light green for items */
+  border: 1px solid #cce6cc; /* Match the border to the list theme */
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, background-color 0.2s; /* Smooth hover animations */
 }
 
 .admin-poll-item:hover {
-  background-color: #d0f0c0; /* Slightly darker green on hover */
+  transform: scale(1.02); /* Slight zoom-in on hover */
+  background-color: #d8f8d8; /* Lighter green on hover */
 }
 
 .admin-poll-item-title {
-  font-size: 1.5rem;
-  color: #2e7d32; /* Darker green for the poll title */
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #255625; /* Slightly darker green for titles */
+  margin-bottom: 5px;
+}
+
+.admin-poll-item-description {
+  font-size: 1rem;
+  color: #3d7a3d; /* Complementary green for descriptions */
   margin-bottom: 10px;
 }
 
-.admin-poll-item-date,
+.admin-poll-item-date {
+  font-size: 0.9rem;
+  color: #657904; /* Muted green for the date */
+  margin-bottom: 5px;
+  font-weight: bolder;
+  font-size: larger;
+}
+
 .admin-poll-item-status {
-  font-size: 1rem;
-  color: #4caf50; /* Green color for the date and status */
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 .admin-poll-item-status.open {
-  color: #388e3c; /* Green for open status */
+  color: #ffffff;
+  background-color: #38a169; /* Green for open status */
 }
 
 .admin-poll-item-status.closed {
-  color: #c62828; /* Red for closed status */
+  color: #ffffff;
+  background-color: #e53e3e; /* Red for closed status */
 }
 
 .admin-poll-empty {
-  font-size: 1.2rem;
-  color: #bdbdbd; /* Light gray for the empty state text */
+  font-size: 1rem;
+  color: #718096; /* Neutral muted gray for the empty message */
   text-align: center;
   margin-top: 20px;
 }
-

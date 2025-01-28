@@ -42,17 +42,11 @@ export default function subLayout({ children }) {
         <Link href="/teacher" className="teacher-link" onClick={validateToken}>
           Home
         </Link>
-        <Link href="/teacher/event" className="teacher-link" onClick={validateToken}>
-          Event
+        <Link href="/teacher/poll" className="teacher-link" onClick={validateToken}>
+          Poll
         </Link>
         <Link href="/teacher/profile" className="teacher-link" onClick={validateToken}>
           Profile
-        </Link>
-        <Link href="/teacher/announcements" className="teacher-link">
-          Announcements
-        </Link>
-        <Link href="/teacher/reports" className="teacher-link">
-          Reports
         </Link>
       </nav>
       <main className="teacher-content">
