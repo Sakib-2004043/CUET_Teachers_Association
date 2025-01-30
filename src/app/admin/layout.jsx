@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { checkToken } from "@/utils/auth";
@@ -9,6 +9,7 @@ import "./layout.css";
 
 export default function AdminLandSubLayout({ children }) {
   const router = useRouter();
+  const [notificationCount, setNotificationCount] = useState(0); // State to hold notification count
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -21,18 +22,14 @@ export default function AdminLandSubLayout({ children }) {
       console.log("Redirected due to invalid token");
       return;
     }
-
     const token = localStorage.getItem("token");
-
     if (token) {
       try {
         const decodedData = jwtDecode(token);
         console.log("Role:", decodedData.role);
-
         if (decodedData.role === "Member") {
           router.push("/teacher");
-        } 
-        else if (decodedData.role !== "Member" && decodedData.role !== "Admin") {
+        } else if (decodedData.role !== "Member" && decodedData.role !== "Admin") {
           router.push("/");
         }
       } catch (error) {
@@ -41,8 +38,23 @@ export default function AdminLandSubLayout({ children }) {
     }
   };
 
+  const fetchNotifications = async () => {
+    try {
+      const response = await fetch('/api/notification'); // Adjust the API endpoint as necessary
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data.notifications[0].adminsNotification)
+      setNotificationCount(data.notifications[0].adminsNotification); 
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
+  };
+
   useEffect(() => {
     validateToken();
+    fetchNotifications(); // Fetch notifications when the component mounts
   }, [router]);
 
   return (
@@ -55,7 +67,7 @@ export default function AdminLandSubLayout({ children }) {
             alt="CUET Teachers Association Logo"
             width={50}
             height={50}
-            style={{height:"auto",width:"auto"}}
+            style={{ height: "auto", width: "auto" }}
             className="admin-layout-cuet-logo"
             onClick={() => router.push("/")}
           />
@@ -64,20 +76,24 @@ export default function AdminLandSubLayout({ children }) {
           <h1 className="admin-layout-header-title">🛠️ CUET Teachers Association Admin Dashboard</h1>
         </div>
         <div className="admin-layout-header-right">
-          <Image
-            src="/bell.png"
-            alt="Notifications"
-            width={50}
-            height={50}
-            className="admin-layout-bell-icon"
-            onClick={() => router.push("/admin/complain")}
-          />
+          <div className="admin-layout-bell-icon-container">
+            <Image
+              src="/bell.png"
+              alt="Notifications"
+              width={50}
+              height={50}
+              className="admin-layout-bell-icon"
+              onClick={() => router.push("/admin/complain")}
+            />
+            {notificationCount > 0 && (
+              <span className="admin-layout-notification-count">{notificationCount}</span>
+            )}
+          </div>
           <button className="admin-layout-logout-btn" onClick={handleLogOut}>
             Log Out
           </button>
         </div>
       </div>
-      
       {/* Navigation Menu */}
       <div className="admin-layout-nav-container">
         <nav className="admin-layout-nav">
@@ -105,7 +121,6 @@ export default function AdminLandSubLayout({ children }) {
           </ul>
         </nav>
       </div>
-      
       {/* Main Content */}
       <main className="admin-layout-main">{children}</main>
     </div>

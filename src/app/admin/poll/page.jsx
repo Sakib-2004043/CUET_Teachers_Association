@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./poll.css";
 import { formatDate } from "@/utils/dateFormat";
+import { setNotification } from "@/utils/notification";
 
 const CreatePoll = () => {
   const [title, setTitle] = useState(""); // Poll title
@@ -54,6 +55,7 @@ const CreatePoll = () => {
       }
 
       const data = await response.json();
+      await setNotification("teachersNotification")
       console.log("Poll created successfully:", data);
       fetchPolls(); // Refresh the list of polls after creation
       setTitle("");
@@ -270,8 +272,6 @@ const CreatePoll = () => {
             )}
           </div>
         </div>
-
-
 
       </div>
     </div>
