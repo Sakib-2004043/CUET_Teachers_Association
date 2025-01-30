@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "./poll.css";
+import { formatDate } from "@/utils/dateFormat";
 
 const CreatePoll = () => {
   const [title, setTitle] = useState(""); // Poll title
@@ -155,7 +156,7 @@ const CreatePoll = () => {
                       {poll.description}
                     </p>
                     <p className="admin-poll-item-date">
-                      Deadline: {new Date(poll.lastDate).toLocaleDateString()}
+                      Deadline: {formatDate(poll.lastDate)}
                     </p>
                     <p className={`admin-poll-item-status ${poll.status}`}>
                       Status: {poll.status}
@@ -201,7 +202,7 @@ const CreatePoll = () => {
                     <tr className="admin-poll-table-row">
                       <td className="admin-poll-table-cell">Deadline</td>
                       <td className="admin-poll-table-cell">
-                        {new Date(selectedPoll.lastDate).toLocaleDateString()}
+                        {formatDate(selectedPoll.lastDate)}
                       </td>
                     </tr>
                     <tr className="admin-poll-table-row">

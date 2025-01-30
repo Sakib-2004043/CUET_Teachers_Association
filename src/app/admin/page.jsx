@@ -6,12 +6,11 @@ import "./admin.css";
 const AdminLandingPage = () => {
   return (
     <div className="ad-land-container">
-      <header className="ad-land-header">
-        <h1 className="ad-land-heading">Welcome, Admin! 👩‍💼👨‍💼</h1>
-        <p className="ad-land-subtitle">Manage everything with ease 🚀</p>
-      </header>
-
       <main className="ad-land-main">
+        <header className="ad-land-header">
+          <h1 className="ad-land-heading">Welcome, Admin! 👩‍💼👨‍💼</h1>
+          <p className="ad-land-subtitle">Manage everything with ease 🚀</p>
+        </header>
         <section className="ad-land-dashboard">
           <h2 className="ad-land-section-heading">Quick Links 🔗</h2>
           <div className="ad-land-link-grid">

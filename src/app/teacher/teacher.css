@@ -1,7 +1,6 @@
 
 /* Background Image */
-.container {
-  background-image: url('/go1.jpg');
+.teacher-home-container {
   background-size: cover;
   background-position: center;
   color: #333;
@@ -9,7 +8,7 @@
 }
 
 /* Header Styles */
-.header {
+.teacher-home-header {
   background: linear-gradient(90deg, #4A148C, #6A1B9A);
   color: white;
   padding: 1rem 2rem;
@@ -19,14 +18,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.header h1 {
+.teacher-home-header h1 {
   margin: 0;
   font-size: 1.8rem;
   font-weight: bold;
   color: rgb(236, 242, 236); /* Make heading green */
 }
 
-.nav-bar ul {
+.teacher-home-nav-bar ul {
   list-style: none;
   display: flex;
   gap: 1.5rem;
@@ -34,7 +33,7 @@
   padding: 0;
 }
 
-.nav-bar {
+.teacher-home-nav-bar {
   background-color: #819a1b;
   color: white;
   text-decoration: none;
@@ -44,24 +43,24 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav-bar ul li a:hover {
+.teacher-home-nav-bar ul li a:hover {
   background-color: #819a1b;
   color: #FFD54F;
 }
 
 /* Main Content */
-.main-content {
+.teacher-home-main-content {
   text-align: left;
 }
 
 /* Card Section */
-.card-container {
+.teacher-home-card-container {
   padding: 20px;
   margin: 20px;
   
 }
 
-.card {
+.teacher-home-card {
   background: linear-gradient(145deg, #FFFFFF, #E0E0E0);
   border-radius: 12px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(255, 255, 255, 0.8);
@@ -71,12 +70,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
+.teacher-home-card:hover {
   transform: translateY(-10px);
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2), -6px -6px 15px rgba(255, 255, 255, 0.9);
 }
 
-.card h3 {
+.teacher-home-card h3 {
   color: green; /* Make heading green */
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -88,7 +87,7 @@
 }
 
 /* Archives Section */
-.archives {
+.teacher-home-archives {
   padding: 20px;
   margin: 20px;
   text-align: left; /* Align text to the left */
@@ -98,13 +97,13 @@
   width: 70%;
 }
 
-.archives h2 {
+.teacher-home-archives h2 {
   color: green; /* Make heading green */
   margin-bottom: 2rem;
   font-size: 1.8rem;
 }
 
-.archive-item {
+.teacher-home-archive-item {
   padding: 20px;
   margin: 20px;
   background: rgba(255, 255, 255, 0.8);
@@ -115,21 +114,21 @@
   transition: transform 0.3s ease;
 }
 
-.archive-item:hover {
+.teacher-home-archive-item:hover {
   transform: scale(1.02);
 }
 
-.archive-item h4 {
+.teacher-home-archive-item h4 {
   margin: 0 0 0.5rem;
   color: green; /* Make heading green */
   font-size: 1.2rem;
 }
 
-.archive-item p {
+.teacher-home-archive-item p {
   margin: 0.5rem 0;
   color: #555;
 }
-.login-link{
+.teacher-home-teacher-home-login-link{
   padding: 10px;
   color: white;
   display: inline;

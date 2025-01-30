@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import "./poll.css";
+import { formatDate } from "@/utils/dateFormat";
 
 export default function TeacherPoll() {
   const [polls, setPolls] = useState([]); // State to store all polls
@@ -75,21 +76,22 @@ export default function TeacherPoll() {
 
   return (
     <div className="teacher-poll-page-container">
-      <h1 className="teacher-poll-page-title">All Polls</h1>
+      <h1 className="teacher-poll-page-title">🗳️ Ongoing Polls</h1>
+      <p className="teacher-poll-subtitle">
+        Participate in the decision-making process. Cast your vote wisely!
+      </p>
+  
       {polls.length > 0 ? (
         <ul className="teacher-poll-list">
           {polls.map((poll) => {
-            // Check if the teacher has already voted
             const hasVotedYes = poll.yesVote.includes(teacherName);
             const hasVotedNo = poll.noVote.includes(teacherName);
-
+  
             return (
               <li key={poll._id} className="teacher-poll-item">
                 <h2 className="teacher-poll-title">{poll.title}</h2>
                 <p className="teacher-poll-description">{poll.description}</p>
-                <p className="teacher-poll-deadline">
-                  Deadline: {new Date(poll.lastDate).toLocaleDateString()}
-                </p>
+                <p className="teacher-poll-deadline">🕒 Deadline: {formatDate(poll.lastDate)}</p>
                 <p
                   className={`teacher-poll-status ${
                     poll.status === "open"
@@ -97,29 +99,35 @@ export default function TeacherPoll() {
                       : "teacher-poll-status-closed"
                   }`}
                 >
-                  Status: {poll.status}
+                  {poll.status === "open" ? "✅ Voting is Open" : "❌ Voting is Closed"}
                 </p>
-                {/* Voting Section */}
+  
                 <div className="teacher-poll-vote-section">
                   {poll.status === "closed" ? (
-                    <p className="teacher-poll-closed-message">Voting is closed.</p>
+                    <p className="teacher-poll-closed-message">
+                      🚫 This poll is closed. Thank you for your participation!
+                    </p>
                   ) : hasVotedYes ? (
-                    <p className="teacher-poll-voted-message">You agreed with this poll.</p>
+                    <p className="teacher-poll-voted-message">
+                      ✅ You have agreed with this poll.
+                    </p>
                   ) : hasVotedNo ? (
-                    <p className="teacher-poll-voted-message">You disagreed with this poll.</p>
+                    <p className="teacher-poll-voted-message">
+                      ❌ You have disagreed with this poll.
+                    </p>
                   ) : (
                     <div className="teacher-poll-vote-buttons">
                       <button
                         className="teacher-poll-agree-button"
                         onClick={handleVoteClick(poll._id, "Yes")}
                       >
-                        Agree
+                        👍 Agree
                       </button>
                       <button
                         className="teacher-poll-disagree-button"
                         onClick={handleVoteClick(poll._id, "No")}
                       >
-                        Disagree
+                        👎 Disagree
                       </button>
                     </div>
                   )}
@@ -129,8 +137,11 @@ export default function TeacherPoll() {
           })}
         </ul>
       ) : (
-        <p className="teacher-poll-empty">No polls available.</p>
+        <p className="teacher-poll-empty">
+          ⚠️ No active polls at the moment. Please check back later!
+        </p>
       )}
     </div>
   );
+  
 }

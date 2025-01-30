@@ -22,36 +22,29 @@ export default function Home() {
   ];
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>CUET Teacher's Association</h1>
-        <nav>
-          <Link href="/login" className='login-link'>Log Out</Link>
-        </nav>
-      </header>
-
-      <main className="main-content">
-        <div className="card-container">
-          <div className="card">
+    <div className="teacher-home-container">
+      <main className="teacher-home-main-content">
+        <div className="teacher-home-card-container">
+          <div className="teacher-home-card">
             <h3>Meeting Schedule</h3>
             <p>View upcoming meetings and events.</p>
           </div>
           <br />
-          <div className="card">
+          <div className="teacher-home-card">
             <h3>Cast Your Vote</h3>
             <p>Participate in ongoing polls.</p>
           </div>
           <br />
-          <div className="card">
+          <div className="teacher-home-card">
             <h3>Poll Results</h3>
             <p>View results of previous votes.</p>
           </div>
         </div>
 
-        <section className="archives">
+        <section className="teacher-home-archives">
           <h2>Recent Archives</h2>
           {archives.map((archive, index) => (
-            <div className="archive-item" key={index}>
+            <div className="teacher-home-archive-item" key={index}>
               <h4>{archive.title}</h4>
               <p>{archive.description}</p>
               <p>{archive.date}</p>

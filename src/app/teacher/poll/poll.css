@@ -1,116 +1,168 @@
+/* poll.css */
+
+/* Root Theme */
+:root {
+  --primary-green: #d4edda;
+  --secondary-green: #c3e6cb;
+  --hover-green: #a5d6a7;
+  --text-dark: #155724;
+  --text-light: #4b734d;
+  --border-green: #8bc34a;
+  --button-hover: #81c784;
+  --button-active: #66bb6a;
+}
+
+/* Page Container */
 .teacher-poll-page-container {
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #e9f7e9; /* Light green background */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.1); /* Subtle green shadow */
-  background-image: url('/login1.jpeg'); /* Optional background image */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.teacher-poll-page-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #2d6a4f; /* Dark green title color */
+  background: var(--primary-green);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  overflow: hidden;
 }
 
+/* Title */
+.teacher-poll-page-title {
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.teacher-poll-subtitle {
+  color: var(--text-light);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Poll List */
 .teacher-poll-list {
   list-style: none;
   padding: 0;
+  max-height: 400px; /* Makes the poll div scrollable */
+  overflow-y: auto;
 }
 
+/* Individual Poll Item */
 .teacher-poll-item {
-  background: #ffffff; /* White background for each poll */
-  margin-bottom: 20px;
+  background: var(--secondary-green);
   padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #b7e4c7; /* Light green border */
-  box-shadow: 0 2px 6px rgba(0, 128, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, background 0.3s;
 }
 
 .teacher-poll-item:hover {
+  background: var(--hover-green);
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.15); /* Stronger shadow on hover */
 }
 
+/* Poll Text */
 .teacher-poll-title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #1b4332; /* Deep green for poll titles */
+  color: var(--text-dark);
+  font-size: 1.5rem;
 }
 
 .teacher-poll-description {
+  color: var(--text-light);
   font-size: 1rem;
-  color: #2d6a4f; /* Slightly lighter green for descriptions */
-  margin: 10px 0;
+  margin-bottom: 8px;
+  text-align: left;
 }
 
 .teacher-poll-deadline {
   font-size: 0.9rem;
-  color: #40916c; /* Medium green for deadlines */
-  margin-bottom: 10px;
+  color: var(--text-dark);
+  font-weight: bold;
 }
 
+/* Poll Status */
 .teacher-poll-status {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
-  padding: 5px 10px;
+  margin-top: 8px;
+  padding: 5px;
   border-radius: 5px;
-  display: inline-block;
 }
 
 .teacher-poll-status-open {
-  background-color: #74c69d; /* Soft green for open polls */
-  color: white;
+  color: #2e7d32;
+  background: #e8f5e9;
 }
 
 .teacher-poll-status-closed {
-  background-color: #95d5b2; /* Pale green for closed polls */
-  color: white;
+  color: #b71c1c;
+  background: #ffebee;
 }
 
+/* Voting Section */
+.teacher-poll-vote-section {
+  margin-top: 12px;
+}
+
+.teacher-poll-voted-message {
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+/* Voting Buttons */
 .teacher-poll-vote-buttons {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  margin-top: 10px;
 }
 
 .teacher-poll-agree-button,
 .teacher-poll-disagree-button {
+  background: var(--border-green);
+  color: white;
+  border: none;
   padding: 10px 15px;
   font-size: 1rem;
-  border: none;
-  border-radius: 5px;
+  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: background 0.3s ease, transform 0.2s;
 }
 
-.teacher-poll-agree-button {
-  background-color: #2d6a4f; /* Deep green for Agree */
-  color: white;
-}
-
-.teacher-poll-agree-button:hover {
-  background-color: #1b4332;
-  transform: translateY(-2px); /* Slight hover lift */
-}
-
-.teacher-poll-disagree-button {
-  background-color: #95d5b2; /* Soft pale green for Disagree */
-  color: white;
-}
-
+.teacher-poll-agree-button:hover,
 .teacher-poll-disagree-button:hover {
-  background-color: #74c69d;
-  transform: translateY(-2px); /* Slight hover lift */
+  background: var(--button-hover);
+  transform: scale(1.05);
 }
 
+.teacher-poll-agree-button:active,
+.teacher-poll-disagree-button:active {
+  background: var(--button-active);
+  transform: scale(1);
+}
+
+/* No Polls Available */
 .teacher-poll-empty {
-  font-size: 1rem;
-  color: #2d6a4f; /* Calm green for empty state */
-  text-align: center;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Scrollbar Customization */
+.teacher-poll-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.teacher-poll-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+.teacher-poll-list::-webkit-scrollbar-thumb {
+  background: var(--border-green);
+  border-radius: 5px;
+}
+
+.teacher-poll-list::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-green);
 }

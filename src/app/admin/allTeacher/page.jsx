@@ -76,7 +76,6 @@ const TeachersList = () => {
 
   return (
     <div className="admin-all-teacher-list">
-      <h1 className="admin-all-teacher-h1">Teachers List</h1>
       
       {/* Search Bar */}
       <div className="admin-all-teacher-search-bar">

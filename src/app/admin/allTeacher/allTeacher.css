@@ -1,19 +1,11 @@
 /* General Layout */
 .admin-all-teacher-list {
   padding: 2rem;
-  background-color: #f1f8f6; /* Light green background for the page */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Heading */
-.admin-all-teacher-h1 {
-  color: #2e7d32; /* Dark green */
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: bold;
-}
 
 /* Search Bar */
 .admin-all-teacher-search-bar {
@@ -24,19 +16,20 @@
 
 .admin-all-teacher-search-bar input {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   padding: 0.8rem 1rem;
   font-size: 1rem;
   border: 1px solid #a5d6a7; /* Light green border */
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #e4f5e1;
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .admin-all-teacher-search-bar input:focus {
-  border-color: #66bb6a; /* Darker green on focus */
-  box-shadow: 0 0 10px rgba(102, 187, 106, 0.4); /* Green glow */
+  border-color: #66bb6a;
+  box-shadow: 0 0 10px rgba(102, 187, 106, 0.4); 
+  font-weight: bolder;
 }
 
 /* Table Styling */
@@ -66,8 +59,9 @@
 }
 
 .admin-all-teacher-table td {
-  background-color: #f9fdf9; /* Very light green for rows */
-  color: #333333; /* Dark gray text */
+  background-color: #f9fdf9; 
+  color: #333333; 
+  cursor: pointer;
 }
 
 .admin-all-teacher-table tr:hover td {

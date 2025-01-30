@@ -4,6 +4,7 @@ import Link from "next/link";
 import { jwtDecode } from "jwt-decode"; // Ensure you have this library installed
 import "./profile.css";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/dateFormat";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -122,65 +123,78 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-page">
-      <div className="profile-content">
-        <header className="profile-header">
-          <h1>Teacher Profile</h1>
-          <Link href="/" className="home-link">
-            Go To Home
-          </Link>
-        </header>
-        <div className="profile-image">
-          {profileImage ? (
-            <img
-              src={profileImage}
-              alt="Profile"
-              className="profile-img"
-            />
-          ) : (
-            <img
-              src="/use.jpg" // Fallback image
-              alt="Default Profile"
-              className="profile-img"
-            />
-          )}
-        </div>
-        {userDetails ? (
-          <div className="profile-details">
-            <p><strong>Name:</strong> {userDetails.name}</p>
-            <p><strong>Email:</strong> {userDetails.email}</p>
-            <p><strong>Role:</strong> {userDetails.role}</p>
-            <p><strong>Department:</strong> {userDetails.department}</p>
-            <p><strong>Mobile:</strong> {userDetails.mobile}</p>
-            <button className="edit-button" onClick={() => router.push("/teacher/edit")}>Edit</button>
+    <div className="teacher-profile-page">
+      <div className="teacher-profile-main-container">
+        <div className="teacher-profile-content">
+          <header className="teacher-profile-header">
+            <h1>Teacher Profile</h1>
+            <Link href="/" className="teacher-profile-home-link">
+              Go To Home
+            </Link>
+          </header>
+          <div className="teacher-profile-image">
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="teacher-profile-img"
+              />
+            ) : (
+              <img
+                src="/use.jpg" // Fallback image
+                alt="Default Profile"
+                className="teacher-profile-img"
+              />
+            )}
           </div>
-        ) : (
-          <p>Loading profile details...</p>
-        )}
-      </div>
-
-      <div className="complaint-section">
-        <div className="complaint-form">
-          <textarea
-            placeholder="Enter your complaint here..."
-            className="complaint-input"
-            value={complaint}
-            onChange={(e) => setComplaint(e.target.value)}
-          ></textarea>
-          <br />
-          <button className="submit-button" onClick={handleComplaintSubmit}>Submit Complaint</button>
+          {userDetails ? (
+            <div className="teacher-profile-details">
+              <p><strong>Name:</strong> {userDetails.name}</p>
+              <p><strong>Email:</strong> {userDetails.email}</p>
+              <p><strong>Role:</strong> {userDetails.role}</p>
+              <p><strong>Department:</strong> {userDetails.department}</p>
+              <p><strong>Mobile:</strong> {userDetails.mobile}</p>
+              <button
+                className="teacher-profile-edit-button"
+                onClick={() => router.push("/teacher/edit")}
+              >
+                Edit
+              </button>
+            </div>
+          ) : (
+            <p>Loading profile details...</p>
+          )}
+          <div className="teacher-profile-complaint-form">
+            <textarea
+              placeholder="Enter your complaint here..."
+              className="teacher-profile-complaint-input"
+              value={complaint}
+              onChange={(e) => setComplaint(e.target.value)}
+            ></textarea>
+            <br />
+            <button
+              className="teacher-profile-submit-button"
+              onClick={handleComplaintSubmit}
+            >
+              Submit Complaint
+            </button>
+          </div>
         </div>
-
-        <div className="previous-complaints">
+  
+        <div className="teacher-profile-previous-complaints">
           <h2>Previous Complaints</h2>
           {previousComplaints.length > 0 ? (
-            <ul>
+            <ul className="teacher-profile-complaint-list">
               {previousComplaints.map((complain, index) => (
-                <li key={index} className="complaint-item">
-                  <p><strong>Date:</strong> {new Date(complain.date).toLocaleDateString()}</p>
-                  <p><strong>Complaint:</strong> {complain.complain}</p>
+                <li key={index} className="teacher-profile-complaint-item">
+                  <p style={{textAlign:"right"}}>
+                    <strong>Date:</strong> {formatDate(complain.date)}
+                  </p>
+                  <hr /><hr />
+                  <p><strong>Complaint:<hr/></strong> {complain.complain}</p>
+                  <hr /><hr />
                   {complain.reply && (
-                    <p><strong>Reply:</strong> {complain.reply}</p>
+                    <p><strong>Reply:<hr/></strong> {complain.reply}</p>
                   )}
                 </li>
               ))}
@@ -192,6 +206,7 @@ const Profile = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Profile;

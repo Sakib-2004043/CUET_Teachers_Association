@@ -6,7 +6,7 @@ import "./edit.css";
 import { useRouter } from "next/navigation";
 
 const Edit = () => {
-  const [render, setRender] = useState(false)
+  const [render, setRender] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [newImage, setNewImage] = useState(null);
@@ -30,7 +30,6 @@ const Edit = () => {
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken);
 
           const response = await fetch("/api/profile", {
             method: "POST",
@@ -109,16 +108,13 @@ const Edit = () => {
 
       try {
         const formData = new FormData();
-
-        // Append all the updated details
-        formData.append("name",updatedDetails.name);
-        formData.append("department",updatedDetails.department);
-        formData.append("mobile",updatedDetails.mobile);
-        formData.append("role",updatedDetails.role);
+        formData.append("name", updatedDetails.name);
+        formData.append("department", updatedDetails.department);
+        formData.append("mobile", updatedDetails.mobile);
+        formData.append("role", updatedDetails.role);
         formData.append("oldPassword", oldPassword);
         formData.append("newPassword", newPassword);
 
-        // Append the new image file if it's uploaded
         if (upImage) {
           formData.append("profileImage", upImage);
         }
@@ -135,8 +131,8 @@ const Edit = () => {
           const updatedData = await response.json();
           setUserDetails(updatedData);
           alert("Profile updated successfully!");
-          router.push("/teacher/profile")
-          setRender(!render)
+          router.push("/teacher/profile");
+          setRender(!render);
         } else {
           console.error("Failed to update profile:", response.statusText);
         }
@@ -147,20 +143,20 @@ const Edit = () => {
   };
 
   return (
-    <div className="profile-page">
-      <div className="profile-content">
-        <header className="profile-header">
+    <div className="teacher-profile-page">
+      <div className="teacher-profile-content">
+        <header className="teacher-profile-header">
           <h1>Teacher Profile</h1>
-          <Link href="/" className="home-link">
+          <Link href="/" className="teacher-profile-home-link">
             Go To Home
           </Link>
         </header>
 
-        <div className="profile-image">
+        <div className="teacher-profile-image">
           <h2>Profile Image</h2>
           {profileImage ? (
             <div>
-              <img src={profileImage} alt="User Profile" className="profile-img" />
+              <img src={profileImage} alt="User Profile" className="teacher-profile-img" />
               <p>Current Profile Image</p>
             </div>
           ) : (
@@ -169,7 +165,7 @@ const Edit = () => {
           <div>
             <h3>Preview New Image</h3>
             {newImage ? (
-              <img src={newImage} alt="New Profile" className="profile-img" />
+              <img src={newImage} alt="New Profile" className="teacher-profile-img" />
             ) : (
               <p>No Image Selected</p>
             )}
@@ -177,13 +173,13 @@ const Edit = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="file-input"
+              className="teacher-profile-file-input"
             />
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="profile-form">
-          <div className="profile-details">
+        <form onSubmit={handleSubmit} className="teacher-profile-form">
+          <div className="teacher-profile-details">
             <p>
               <strong>Name:</strong>
               <input
@@ -191,6 +187,7 @@ const Edit = () => {
                 name="name"
                 value={updatedDetails.name}
                 onChange={handleInputChange}
+                className="teacher-profile-input"
               />
             </p>
             <p>
@@ -203,6 +200,7 @@ const Edit = () => {
                 name="role"
                 value={"Member"}
                 onChange={handleInputChange}
+                className="teacher-profile-input"
               />
             </p>
             <p>
@@ -212,6 +210,7 @@ const Edit = () => {
                 name="department"
                 value={updatedDetails.department}
                 onChange={handleInputChange}
+                className="teacher-profile-input"
               />
             </p>
             <p>
@@ -221,11 +220,12 @@ const Edit = () => {
                 name="mobile"
                 value={updatedDetails.mobile}
                 onChange={handleInputChange}
+                className="teacher-profile-input"
               />
             </p>
           </div>
 
-          <div className="password-change">
+          <div className="teacher-profile-password-change">
             <h3>Change Password</h3>
             <p>
               <strong>Old Password:</strong>
@@ -234,7 +234,7 @@ const Edit = () => {
                 name="oldPassword"
                 value={oldPassword}
                 onChange={handlePasswordChange}
-                placeholder="Enter old password"
+                className="teacher-profile-input"
               />
             </p>
             <p>
@@ -244,7 +244,7 @@ const Edit = () => {
                 name="newPassword"
                 value={newPassword}
                 onChange={handlePasswordChange}
-                placeholder="Enter new password"
+                className="teacher-profile-input"
               />
             </p>
             <p>
@@ -254,12 +254,12 @@ const Edit = () => {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={handlePasswordChange}
-                placeholder="Confirm new password"
+                className="teacher-profile-input"
               />
             </p>
           </div>
 
-          <button type="submit" className="submit-button">
+          <button type="submit" className="teacher-profile-submit-button">
             Save Changes
           </button>
         </form>
