@@ -182,27 +182,39 @@ const Profile = () => {
         </div>
   
         <div className="teacher-profile-previous-complaints">
-          <h2>Previous Complaints</h2>
+          <h2 className="teacher-profile-heading">Previous Complaints</h2>
+
           {previousComplaints.length > 0 ? (
             <ul className="teacher-profile-complaint-list">
               {previousComplaints.map((complain, index) => (
                 <li key={index} className="teacher-profile-complaint-item">
-                  <p style={{textAlign:"right"}}>
-                    <strong>Date:</strong> {formatDate(complain.date)}
-                  </p>
-                  <hr /><hr />
-                  <p><strong>Complaint:<hr/></strong> {complain.complain}</p>
-                  <hr /><hr />
+                  {/* Complaint Card */}
+                  <div className="teacher-profile-complaint-card">
+                    <p className="teacher-profile-complaint-date">
+                      <strong>Date:</strong> {formatDate(complain.date)}
+                    </p>
+                    <hr />
+                    <p className="teacher-profile-complaint-text">
+                      <strong>Complaint:</strong> {complain.complain}
+                    </p>
+                  </div>
+
+                  {/* Reply Card (Only if available) */}
                   {complain.reply && (
-                    <p><strong>Reply:<hr/></strong> {complain.reply}</p>
+                    <div className="teacher-profile-reply-card">
+                      <p className="teacher-profile-reply-text">
+                        <strong>Reply:</strong> {complain.reply}
+                      </p>
+                    </div>
                   )}
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No previous complaints found.</p>
+            <p className="teacher-profile-no-complaints">No previous complaints found.</p>
           )}
         </div>
+
       </div>
     </div>
   );

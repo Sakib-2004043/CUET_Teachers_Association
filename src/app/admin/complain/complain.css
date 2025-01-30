@@ -1,85 +1,172 @@
-/* General Container for Complaints Page */
+/* Page Container */
 .admin-comp-complaints-page {
-  padding: 20px;
-  width: 60%;
-  font-family: 'Times New Roman', Times, serif;
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #dcf5d0; /* Soft off-white */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  font-family: "Arial", sans-serif;
 }
 
-/* Card Styles for Each Section */
+/* Complaints List */
+.admin-comp-complaints-list {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 500px;
+  background-color: #fff7e6; /* Light beige */
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ffbf00; /* Gold border */
+}
+
+/* Individual Complaint Item */
+.admin-comp-complaint-item {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease;
+}
+
+.admin-comp-complaint-item:hover {
+  transform: scale(1.01);
+}
+
+/* Complaint Cards */
 .admin-comp-card {
-  background-color: #e7f9e7; /* Light green background */
-  border-radius: 8px;
   padding: 15px;
-  margin: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Teacher Name Card */
+.admin-comp-teacher-name-card {
+  background-color: #e6f7ff; /* Light blue */
+  border: 2px solid #0047ab; /* Deep blue */
+  font-weight: bold;
+  text-align: center;
+}
+
+.admin-comp-teacher-name-card:hover {
+  background-color: #d4f1ff;
+}
+
+/* Complaint Card */
+.admin-comp-complaint-card {
+  background-color: #fe9898; /* Elegant gray */
+  border-left: 5px solid #ffbf00; /* Gold */
+  margin-right: 200px;
+  text-align: justify;
+}
+
+.admin-comp-complaint-card:hover {
+  background-color: #f94747;
+}
+
+/* Reply Card */
+.admin-comp-reply-card {
+  background-color: #9bf38e; /* Light blue */
+  border-right: 5px solid #0047ab; /* Deep blue */
+  text-align: justify;
+  margin-left: 200px;
+}
+
+.admin-comp-reply-card:hover {
+  background-color: #69c671;
+}
+
+/* Reply Input Container */
+.admin-comp-reply-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Reply Input Field */
+.admin-comp-reply-input {
+  width: 95.5%;
+  min-height: 200px;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  resize: none;
+  font-size: 14px;
+  background-color: #ffffff;
   transition: all 0.3s ease;
 }
 
-.admin-comp-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Specific Styling for Each Card Type */
-.admin-comp-teacher-name-card{
-  margin-bottom: 15px;
-  text-align: right;
-}
-
-/* Reply Card Styling */
-.admin-comp-reply-card {
-  background-color: #f0f9f0; /* Slightly lighter green */
-  padding: 20px;
-  border: 1px solid #d1e8d1;
-}
-
-.admin-comp-reply-input-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-comp-reply-input {
-  height: 100px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  resize: none;
-  background-color: #fff;
-}
-
 .admin-comp-reply-input:focus {
-  border-color: #66bb6a;
-  outline: none;
+  border-color: #ffbf00;
+  box-shadow: 0 0 5px rgba(255, 191, 0, 0.5);
 }
 
+/* Submit Button */
 .admin-comp-reply-submit-button {
-  background-color: #66bb6a;
+  background-color: #0047ab; /* Deep blue */
   color: white;
+  padding: 8px 14px;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .admin-comp-reply-submit-button:hover {
-  background-color: #4caf50;
+  background-color: #005fd1; /* Lighter blue */
+  transform: scale(1.05);
 }
 
-/* List Styling */
-.admin-comp-complaints-list {
-  list-style-type: none;
-  padding: 0;
+/* Horizontal Rule */
+hr {
+  border: none;
+  border-top: 1px solid #d0d0d0;
+  margin: 8px 0;
 }
 
-.admin-comp-complaint-item {
-  margin: 20px;
-  background-color: #baf5bb;
-  padding: 20px;
-  border-radius: 20px;
-
+/* Search Bar */
+.admin-comp-search-bar {
+  width: 97%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #c4f7f7; 
+  font-weight: bolder;
+  transition: all 0.3s ease;
 }
 
+.admin-comp-search-bar:focus {
+  outline: none;
+  border-color: #ffbf00;
+  box-shadow: 0 0 5px rgba(255, 191, 0, 0.5);
+}
+
+/* Highlighted Search Text */
+mark {
+  background-color: #ffcc00; /* Modern yellow */
+  color: black;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Scrollbar Styling */
+.admin-comp-complaints-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-comp-complaints-list::-webkit-scrollbar-thumb {
+  background: #0047ab; /* Deep blue */
+  border-radius: 4px;
+}
+
+.admin-comp-complaints-list::-webkit-scrollbar-thumb:hover {
+  background: #005fd1;
+}

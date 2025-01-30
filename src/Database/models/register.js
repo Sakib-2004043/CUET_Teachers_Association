@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
   profileImage: {
     type: Buffer, 
     default: null
+  },
+  notificationSeen: {
+    type: Number,
+    default: 0
   }
 },{ timestamps: true });
 

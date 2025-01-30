@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import "./login.css"
 import AllLandingHeader from "../Header";
@@ -116,4 +117,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default dynamic(() => Promise.resolve(LoginForm), { ssr: false });

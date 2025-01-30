@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { formatDate } from "@/utils/dateFormat";
-
-import "./complain.css"
+import "./complain.css";
 
 const AdminComplaintsPage = () => {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [replyText, setReplyText] = useState({}); // State to manage reply text for each complaint
+  const [replyText, setReplyText] = useState({});
+  const [searchQuery, setSearchQuery] = useState(""); // Search state
 
   // Fetch all complaints on component mount
   useEffect(() => {
@@ -66,13 +66,11 @@ const AdminComplaintsPage = () => {
 
       if (response.ok) {
         alert("Reply submitted successfully!");
-        // Update the local state after successfully replying
         setComplaints((prevComplaints) =>
           prevComplaints.map((complaint) =>
             complaint._id === complaintId ? { ...complaint, reply } : complaint
           )
         );
-        // Clear the reply input for this complaint
         setReplyText((prev) => ({
           ...prev,
           [complaintId]: "",
@@ -86,28 +84,57 @@ const AdminComplaintsPage = () => {
     }
   };
 
-  // Sort complaints by date in descending order
-  const sortedComplaints = complaints.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Filter complaints based on search query
+  const filteredComplaints = complaints.filter((complaint) =>
+    complaint.teacherName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Highlight matching text
+  const highlightText = (text, query) => {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, "gi");
+    return text.replace(regex, `<mark>$1</mark>`);
+  };
 
   if (loading) return <p>Loading complaints...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="admin-comp-complaints-page">
-      {sortedComplaints.length > 0 ? (
+      {/* Search Bar */}
+      <input
+        type="text"
+        className="admin-comp-search-bar"
+        placeholder="Search by teacher name..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      {filteredComplaints.length > 0 ? (
         <ul className="admin-comp-complaints-list">
-          {sortedComplaints.map((complaint) => (
+          {filteredComplaints.map((complaint) => (
             <li key={complaint._id} className="admin-comp-complaint-item">
               <div className="admin-comp-card admin-comp-teacher-name-card">
-                <strong>Teacher Name:</strong> {complaint.teacherName}
-                <br /><br />
+                <strong>Teacher Name:</strong>{" "}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: highlightText(complaint.teacherName, searchQuery),
+                  }}
+                />
+                <br />
+                <br />
                 <strong>Date:</strong> {formatDate(complaint.date)}
               </div>
               <div className="admin-comp-card admin-comp-complaint-card">
-                <strong>Complaint:<br/><hr/></strong> {complaint.complain}
+                <strong>Complaint:</strong>
+                <br />
+                <hr />
+                {complaint.complain}
               </div>
               <div className="admin-comp-card admin-comp-reply-card">
-                <strong>Reply:<br/><hr/></strong>
+                <strong>Reply:</strong>
+                <br />
+                <hr />
                 {complaint.reply !== "Waiting For Reply......" ? (
                   <span>{complaint.reply}</span>
                 ) : (
@@ -137,8 +164,6 @@ const AdminComplaintsPage = () => {
       )}
     </div>
   );
-  
-  
 };
 
 export default AdminComplaintsPage;
