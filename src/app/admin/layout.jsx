@@ -82,13 +82,14 @@ export default function AdminLandSubLayout({ children }) {
               alt="Notifications"
               width={50}
               height={50}
-              className="admin-layout-bell-icon"
+              className={`admin-layout-bell-icon ${notificationCount > 0 ? "shake" : ""}`}
               onClick={() => router.push("/admin/complain")}
             />
-            {notificationCount > 0 && (
+            {notificationCount >= 0 && (
               <span className="admin-layout-notification-count">{notificationCount}</span>
             )}
           </div>
+
           <button className="admin-layout-logout-btn" onClick={handleLogOut}>
             Log Out
           </button>

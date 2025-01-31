@@ -56,20 +56,57 @@
   font-weight: bold;
 }
 
+
+
+
+
 .admin-layout-header-right {
   display: flex;
   align-items: center;
 }
 
-.admin-layout-bell-icon {
-  margin-right: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+
+/* Notification Icom */
+.admin-layout-bell-icon-container {
+  position: relative;
+  display: inline-block;
 }
 
-.admin-layout-bell-icon:hover {
-  transform: scale(1.1);
+.admin-layout-bell-icon {
+  display: block;
+  transition: transform 0.3s ease-in-out;
 }
+
+@keyframes rotate-bell {
+  0% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(-30deg); }
+}
+
+.admin-layout-bell-icon.shake {
+  animation: rotate-bell 0.5s infinite ease-in-out;
+  transform-origin: 39px 10px;
+}
+
+.admin-layout-notification-count {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(50%, -50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
 
 .admin-layout-logout-btn {
   background-color: #f44336;
@@ -89,6 +126,15 @@
 .admin-layout-logout-btn:active {
   border: 2px solid rgb(41, 104, 25);
 }
+
+
+
+
+
+
+
+
+
 
 /* Navigation Container */
 .admin-layout-nav-container {
