@@ -3,13 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { formatDate } from "@/utils/dateFormat";
 import "./complain.css";
+import { resetAdminNotification } from "@/utils/notification";
 
 const AdminComplaintsPage = () => {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [replyText, setReplyText] = useState({});
-  const [searchQuery, setSearchQuery] = useState(""); // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState("all"); // Filter state
+  
 
   // Fetch all complaints on component mount
   useEffect(() => {
@@ -19,8 +22,14 @@ const AdminComplaintsPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched complaints:", data);
-          setComplaints(data.complaints);
+
+          // Sort complaints in descending order by date
+          const sortedComplaints = data.complaints.sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+
+          setComplaints(sortedComplaints);
+          await resetAdminNotification("adminsNotification");
         } else {
           setError("Failed to fetch complaints.");
         }
@@ -34,6 +43,7 @@ const AdminComplaintsPage = () => {
 
     fetchComplaints();
   }, []);
+
 
   // Handle reply text changes
   const handleReplyChange = (complaintId, value) => {
@@ -84,10 +94,18 @@ const AdminComplaintsPage = () => {
     }
   };
 
-  // Filter complaints based on search query
-  const filteredComplaints = complaints.filter((complaint) =>
-    complaint.teacherName.toLowerCase().includes(searchQuery.toLowerCase())
+  // Filter complaints based on selected category
+  const filteredComplaints = complaints
+  .filter((complaint) => {
+    if (filterType === "all") return true;
+    if (filterType === "replied") return complaint.reply !== "Waiting For Reply......";
+    if (filterType === "unreplied") return complaint.reply === "Waiting For Reply......";
+    return true;
+  })
+  .filter((complaint) => 
+    searchQuery === "" || complaint.teacherName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
 
   // Highlight matching text
   const highlightText = (text, query) => {
@@ -109,6 +127,28 @@ const AdminComplaintsPage = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+
+      {/* Filter Buttons */}
+      <div className="admin-comp-nav-button-container">
+        <button 
+          className="admin-comp-nav-button-all-complain"
+          onClick={() => setFilterType("all")}
+        >
+          All Complaints
+        </button>
+        <button 
+          className="admin-comp-nav-button-replied-complain"
+          onClick={() => setFilterType("replied")}
+        >
+          Replied Complaints
+        </button>
+        <button 
+          className="admin-comp-nav-button-unreplied-complain"
+          onClick={() => setFilterType("unreplied")}
+        >
+          Unreplied Complaints
+        </button>
+      </div>
 
       {filteredComplaints.length > 0 ? (
         <ul className="admin-comp-complaints-list">

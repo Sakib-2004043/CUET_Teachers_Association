@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode"; // Ensure you have this library installe
 import "./profile.css";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/dateFormat";
+import { setNotification } from "@/utils/notification";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -75,12 +76,18 @@ const Profile = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setPreviousComplaints(data.complaints); 
-          console.log(data)
-        } else {
+
+          // Sort complaints by date in descending order
+          const sortedComplaints = data.complaints.sort((a, b) => 
+            new Date(b.date) - new Date(a.date)
+          );
+          setPreviousComplaints(sortedComplaints);
+        } 
+        else {
           console.error("Failed to fetch previous complaints:", response.statusText);
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("Error fetching previous complaints:", error);
       }
     }
@@ -107,9 +114,9 @@ const Profile = () => {
 
         if (response.ok) {
           alert("Complaint submitted successfully!");
-          setComplaint(""); // Clear the input field after submission
+          setComplaint(""); 
+          await setNotification("adminsNotification")
 
-          // Refresh the list of previous complaints
           await fetchPreviousComplaints(userDetails.name);
         } else {
           console.error("Failed to submit complaint:", response.statusText);

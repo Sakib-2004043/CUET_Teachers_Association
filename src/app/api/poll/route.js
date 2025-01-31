@@ -1,19 +1,33 @@
 import { NextResponse } from "next/server";
-import Polls from "@/Database/models/poll"; // Your Mongoose Poll model
-import connectDB from "@/Database/connectDB"; // Database connection
+import Polls from "@/Database/models/poll";
+import connectDB from "@/Database/connectDB";
 
-// Get All Poll
+// Get All Polls and Update Status
 export async function GET(req) {
   try {
     // Connect to the database
     await connectDB();
 
+    // Get current date
+    const currentDate = new Date();
+
     // Fetch all polls from the database
     const allPolls = await Polls.find({});
 
-    // Return a success response with the list of polls
+    // Update status based on lastDate
+    const updatedPolls = await Promise.all(
+      allPolls.map(async (poll) => {
+        if (poll.lastDate < currentDate && poll.status !== "closed") {
+          poll.status = "closed";
+          await poll.save(); // Save the updated poll
+        }
+        return poll;
+      })
+    );
+
+    // Return a success response with the updated polls
     return NextResponse.json(
-      { message: "Polls fetched successfully.", polls: allPolls },
+      { message: "Polls fetched successfully.", polls: updatedPolls },
       { status: 200 }
     );
   } catch (error) {

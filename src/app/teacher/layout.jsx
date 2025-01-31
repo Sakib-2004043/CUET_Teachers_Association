@@ -1,18 +1,39 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { checkToken } from "@/utils/auth";
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import "./layout.css";
+import { getTeacherNotification, resetTeacherNotification } from "@/utils/notification";
 
 export default function teacherLandSubLayout({ children }) {
   const router = useRouter();
 
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [finalCount, setFinalCount] = useState(0)
+  const [email, setEmail] = useState("")
+
   const handleLogOut = () => {
     localStorage.removeItem("token");
     router.push("/login"); // Redirect to login page
+  };
+
+  const fetchNotifications = async (emaill) => {
+    try {
+      const response = await fetch('/api/notification'); // Adjust the API endpoint as necessary
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setFinalCount(data.notifications[0].teachersNotification)
+      const count = await getTeacherNotification(emaill)
+      setNotificationCount(data.notifications[0].teachersNotification - count); 
+    } 
+    catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
   };
 
   const validateToken = async () => {
@@ -28,6 +49,8 @@ export default function teacherLandSubLayout({ children }) {
       try {
         const decodedData = jwtDecode(token);
         console.log("Role:", decodedData.role);
+        setEmail(decodedData.email)
+        fetchNotifications(decodedData.email);
 
         if (decodedData.role === "Admin") {
           router.push("/admin");
@@ -38,12 +61,20 @@ export default function teacherLandSubLayout({ children }) {
       } catch (error) {
         console.error("Error decoding token:", error);
       }
+
     }
   };
 
   useEffect(() => {
     validateToken();
+    
   }, [router]);
+
+  const handleBellClick = () => {
+    setNotificationCount(0);
+    resetTeacherNotification(email, finalCount)
+    router.push("/teacher/poll");
+  };
 
   return (
     <div className="teacher-layout-container">
@@ -64,14 +95,20 @@ export default function teacherLandSubLayout({ children }) {
           <h1 className="teacher-layout-header-title">🛠️ CUET Teachers Association Teacher Dashboard</h1>
         </div>
         <div className="teacher-layout-header-right">
-          <Image
-            src="/bell.png"
-            alt="Notifications"
-            width={50}
-            height={50}
-            className="teacher-layout-bell-icon"
-            onClick={() => router.push("/teacher/poll")}
-          />
+          <div className="teacher-layout-bell-icon-container">
+            <Image
+              src="/bell.png"
+              alt="Notifications"
+              width={50}
+              height={50}
+              className={`teacher-layout-bell-icon ${notificationCount > 0 ? "shake" : ""}`}
+              onClick={handleBellClick}
+            />
+            {notificationCount >= 0 && (
+              <span className="teacher-layout-notification-count">{notificationCount}</span>
+            )}
+          </div>
+
           <button className="teacher-layout-logout-btn" onClick={handleLogOut}>
             Log Out
           </button>

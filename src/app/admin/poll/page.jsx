@@ -56,7 +56,6 @@ const CreatePoll = () => {
 
       const data = await response.json();
       await setNotification("teachersNotification")
-      console.log("Poll created successfully:", data);
       fetchPolls(); // Refresh the list of polls after creation
       setTitle("");
       setDescription("");

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import userRegistrations from "@/Database/models/register"; // Mongoose User model
+import userRegistrations from "@/Database/models/register";
 import connectDB from "@/Database/connectDB";
 import jwt from 'jsonwebtoken';
 require('dotenv').config()
@@ -98,7 +98,8 @@ export async function PUT(req) {
         email: user.email,
         role: user.role,
         department: user.department,
-        mobile:user.mobile
+        mobile:user.mobile,
+        notificationSeen: user.notificationSeen
       },
       JWT_SECRET,
       { expiresIn: '1h' } // Token validity: 1 hour
@@ -115,5 +116,49 @@ export async function PUT(req) {
   } catch (error) {
     console.error('Error during login:', error);
     return NextResponse.json({ error: 'Server error. Please try again later.' }, { status: 500 });
+  }
+}
+
+// PATCH method to retrieve seen notifications of a teacher
+export async function PATCH(req) {
+  try {
+    // Connect to the database
+    await connectDB();
+
+    // Parse the request body
+    const { email } = await req.json();
+
+    // Validate input
+    if (!email) {
+      return NextResponse.json(
+        { error: "Email is required." },
+        { status: 400 }
+      );
+    }
+
+    // Find user by email
+    const user = await userRegistrations.findOne({ email });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found." },
+        { status: 404 }
+      );
+    }
+
+    // Return the notificationSeen field
+    return NextResponse.json(
+      {
+        message: "Notification count retrieved successfully.",
+        notificationSeen: user.notificationSeen || 0, // Ensure default value if not set
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error retrieving notification count:", error);
+    return NextResponse.json(
+      { error: "Server error. Please try again later.", details: error.message },
+      { status: 500 }
+    );
   }
 }

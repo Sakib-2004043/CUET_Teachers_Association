@@ -9,6 +9,74 @@
   font-family: "Arial", sans-serif;
 }
 
+/* Search Bar */
+.admin-comp-search-bar {
+  width: 97%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #c4f7f7; 
+  font-weight: bolder;
+  transition: all 0.3s ease;
+}
+
+
+
+/* Navigation Button*/
+.admin-comp-nav-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-comp-nav-button-container button {
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* All Complaints */
+.admin-comp-nav-button-all-complain {
+  background: #d1e8ff;
+  color: #007bff;
+}
+
+.admin-comp-nav-button-all-complain:hover {
+  background: #b0d4ff;
+  transform: scale(1.05);
+}
+
+/* Replied Complaints */
+.admin-comp-nav-button-replied-complain {
+  background: #d1ffd8;
+  color: #28a745;
+}
+
+.admin-comp-nav-button-replied-complain:hover {
+  background: #b2f7b7;
+  transform: scale(1.05);
+}
+
+/* Unreplied Complaints */
+.admin-comp-nav-button-unreplied-complain {
+  background: #ffdede;
+  color: #dc3545;
+}
+
+.admin-comp-nav-button-unreplied-complain:hover {
+  background: #ffbdbd;
+  transform: scale(1.05);
+}
+
+
 /* Complaints List */
 .admin-comp-complaints-list {
   list-style: none;
@@ -28,7 +96,23 @@
   flex-direction: column;
   gap: 10px;
   transition: transform 0.2s ease;
+
+  opacity: 0;
+  transform: translateY(100px);
+  animation: fadeIn 0.5s ease-out forwards;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .admin-comp-complaint-item:hover {
   transform: scale(1.01);
@@ -127,19 +211,6 @@ hr {
   border: none;
   border-top: 1px solid #d0d0d0;
   margin: 8px 0;
-}
-
-/* Search Bar */
-.admin-comp-search-bar {
-  width: 97%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #d0d0d0;
-  border-radius: 5px;
-  font-size: 14px;
-  background-color: #c4f7f7; 
-  font-weight: bolder;
-  transition: all 0.3s ease;
 }
 
 .admin-comp-search-bar:focus {

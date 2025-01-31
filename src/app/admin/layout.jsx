@@ -9,7 +9,7 @@ import "./layout.css";
 
 export default function AdminLandSubLayout({ children }) {
   const router = useRouter();
-  const [notificationCount, setNotificationCount] = useState(0); // State to hold notification count
+  const [notificationCount, setNotificationCount] = useState(0); 
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -45,7 +45,6 @@ export default function AdminLandSubLayout({ children }) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log(data.notifications[0].adminsNotification)
       setNotificationCount(data.notifications[0].adminsNotification); 
     } catch (error) {
       console.error("Error fetching notifications:", error);
@@ -54,8 +53,13 @@ export default function AdminLandSubLayout({ children }) {
 
   useEffect(() => {
     validateToken();
-    fetchNotifications(); // Fetch notifications when the component mounts
+    fetchNotifications();
   }, [router]);
+
+  const handleBellClick = () => {
+    setNotificationCount(0);
+    router.push("/admin/complain");
+  };
 
   return (
     <div className="admin-layout-container">
@@ -83,7 +87,7 @@ export default function AdminLandSubLayout({ children }) {
               width={50}
               height={50}
               className={`admin-layout-bell-icon ${notificationCount > 0 ? "shake" : ""}`}
-              onClick={() => router.push("/admin/complain")}
+              onClick={handleBellClick}
             />
             {notificationCount >= 0 && (
               <span className="admin-layout-notification-count">{notificationCount}</span>
