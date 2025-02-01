@@ -6,4 +6,4 @@ npx playwright test tests/register.spec.js --workers 4
 
 npx playwright test tests/teacherPoll.spec.js --workers 4
 
-npx playwright test tests/dummy.spec.js --workers 4
+npx playwright test tests/dummy.spec.js --workers 1
