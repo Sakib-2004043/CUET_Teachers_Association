@@ -22,7 +22,6 @@ export default function Home() {
   ];
 
   return (
-    <div className="teacher-home-container">
       <main className="teacher-home-main-content">
         <div className="teacher-home-card-container">
           <div className="teacher-home-card">
@@ -52,6 +51,5 @@ export default function Home() {
           ))}
         </section>
       </main>
-    </div>
   );
 }
