@@ -140,7 +140,8 @@
 
 .admin-poll-item-description {
   color: #555555;
-  font-weight: bold; /* Bold description text */
+  font-weight: bold; 
+  text-align: justify;
 }
 
 .admin-poll-item-date,
@@ -184,7 +185,7 @@
 
 .admin-poll-table th,
 .admin-poll-table td {
-  text-align: left;
+  text-align: justify;
   padding: 0.75rem;
   border: 1px solid #c8e6c9; /* Light green border */
   font-weight: bold; /* Bolder table text */

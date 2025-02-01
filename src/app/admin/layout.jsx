@@ -73,7 +73,7 @@ export default function AdminLandSubLayout({ children }) {
             height={50}
             style={{ height: "auto", width: "auto" }}
             className="admin-layout-cuet-logo"
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/admin")}
           />
         </div>
         <div className="admin-layout-header-center">

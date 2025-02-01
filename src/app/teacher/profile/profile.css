@@ -96,7 +96,7 @@
 }
 
 .teacher-profile-complaint-input {
-  width: 90%;
+  width: 95%;
   min-height: 80px;
   padding: 10px;
   border: 1px solid #c6e1c6;
@@ -113,7 +113,7 @@
   box-shadow: 0 0 5px #85c785;
 }
 
-.teacher-profile-submit-button {
+.teacher-profile-comp-submit-button {
   margin-top: 10px;
   padding: 10px 16px;
   background-color: #4caf50;
@@ -178,7 +178,11 @@
 /* Complaint Date */
 .teacher-profile-complaint-date {
   font-weight: bold;
-  color: #d35400; /* Deep orange */
+  color: #d35400; 
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #c4ecc8;
+  text-align: right;
 }
 
 /* Complaint Text */

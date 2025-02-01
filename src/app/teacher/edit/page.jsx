@@ -147,22 +147,26 @@ const Edit = () => {
       <div className="teacher-profile-content">
         <header className="teacher-profile-header">
           <h1>Teacher Profile</h1>
-          <Link href="/" className="teacher-profile-home-link">
+          <Link href="/teacher" className="teacher-profile-home-link">
             Go To Home
           </Link>
         </header>
 
-        <div className="teacher-profile-image">
-          <h2>Profile Image</h2>
-          {profileImage ? (
-            <div>
-              <img src={profileImage} alt="User Profile" className="teacher-profile-img" />
-              <p>Current Profile Image</p>
-            </div>
-          ) : (
-            <p>No Profile Image</p>
-          )}
-          <div>
+        <div className="teacher-profile-image-container">
+          {/* <h2 className="teacher-profile-header2">Profile Image</h2> */}
+          <div className="teacher-profile-prev-image-div">
+            <h3>Profile Image</h3>
+            {profileImage ? (
+              <>
+                
+                <img src={profileImage} alt="User Profile" className="teacher-profile-img" />
+                <p>Current Profile Image</p>
+              </>
+            ) : (
+              <p className="teacher-profile-prev-image-div">No Profile Image</p>
+            )}
+          </div>
+          <div className="teacher-profile-new-image-div">
             <h3>Preview New Image</h3>
             {newImage ? (
               <img src={newImage} alt="New Profile" className="teacher-profile-img" />
@@ -179,8 +183,8 @@ const Edit = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="teacher-profile-form">
-          <div className="teacher-profile-details">
-            <p>
+          <section className="teacher-profile-details">
+            <label>
               <strong>Name:</strong>
               <input
                 type="text"
@@ -189,21 +193,22 @@ const Edit = () => {
                 onChange={handleInputChange}
                 className="teacher-profile-input"
               />
-            </p>
+            </label>
             <p>
               <strong>Email:</strong> {updatedDetails.email}
             </p>
-            <p>
+            <label>
               <strong>Role:</strong>
               <input
                 type="text"
                 name="role"
-                value={"Member"}
+                value="Member"
                 onChange={handleInputChange}
                 className="teacher-profile-input"
+                disabled
               />
-            </p>
-            <p>
+            </label>
+            <label>
               <strong>Department:</strong>
               <input
                 type="text"
@@ -212,8 +217,8 @@ const Edit = () => {
                 onChange={handleInputChange}
                 className="teacher-profile-input"
               />
-            </p>
-            <p>
+            </label>
+            <label>
               <strong>Mobile:</strong>
               <input
                 type="text"
@@ -222,12 +227,12 @@ const Edit = () => {
                 onChange={handleInputChange}
                 className="teacher-profile-input"
               />
-            </p>
-          </div>
+            </label>
+          </section>
 
-          <div className="teacher-profile-password-change">
+          <section className="teacher-profile-password-change">
             <h3>Change Password</h3>
-            <p>
+            <label>
               <strong>Old Password:</strong>
               <input
                 type="password"
@@ -236,8 +241,8 @@ const Edit = () => {
                 onChange={handlePasswordChange}
                 className="teacher-profile-input"
               />
-            </p>
-            <p>
+            </label>
+            <label>
               <strong>New Password:</strong>
               <input
                 type="password"
@@ -246,8 +251,8 @@ const Edit = () => {
                 onChange={handlePasswordChange}
                 className="teacher-profile-input"
               />
-            </p>
-            <p>
+            </label>
+            <label>
               <strong>Confirm New Password:</strong>
               <input
                 type="password"
@@ -256,8 +261,8 @@ const Edit = () => {
                 onChange={handlePasswordChange}
                 className="teacher-profile-input"
               />
-            </p>
-          </div>
+            </label>
+          </section>
 
           <button type="submit" className="teacher-profile-submit-button">
             Save Changes

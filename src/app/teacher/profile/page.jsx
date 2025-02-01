@@ -45,13 +45,16 @@ const Profile = () => {
 
             // Fetch previous complaints for the teacher
             await fetchPreviousComplaints(data.name);
-          } else {
+          } 
+          else {
             console.error("Failed to fetch profile data:", response.statusText);
           }
-        } catch (error) {
+        } 
+        catch (error) {
           console.error("Error fetching profile:", error);
         }
-      } else {
+      } 
+      else {
         console.error("No token found in localStorage.");
       }
     };
@@ -135,7 +138,7 @@ const Profile = () => {
         <div className="teacher-profile-content">
           <header className="teacher-profile-header">
             <h1>Teacher Profile</h1>
-            <Link href="/" className="teacher-profile-home-link">
+            <Link href="/teacher" className="teacher-profile-home-link">
               Go To Home
             </Link>
           </header>
@@ -180,7 +183,7 @@ const Profile = () => {
             ></textarea>
             <br />
             <button
-              className="teacher-profile-submit-button"
+              className="teacher-profile-comp-submit-button"
               onClick={handleComplaintSubmit}
             >
               Submit Complaint
@@ -200,9 +203,8 @@ const Profile = () => {
                     <p className="teacher-profile-complaint-date">
                       <strong>Date:</strong> {formatDate(complain.date)}
                     </p>
-                    <hr />
                     <p className="teacher-profile-complaint-text">
-                      <strong>Complaint:</strong> {complain.complain}
+                      <strong>Complaint:</strong><hr /> {complain.complain}
                     </p>
                   </div>
 
@@ -210,7 +212,7 @@ const Profile = () => {
                   {complain.reply && (
                     <div className="teacher-profile-reply-card">
                       <p className="teacher-profile-reply-text">
-                        <strong>Reply:</strong> {complain.reply}
+                        <strong>Reply:</strong><hr /> {complain.reply}
                       </p>
                     </div>
                   )}
