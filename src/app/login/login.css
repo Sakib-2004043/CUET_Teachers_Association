@@ -1,6 +1,5 @@
 /* General styles */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -135,4 +134,16 @@ body {
 .login-forgot-password .login-link-button:active {
   color: #3e8b50; /* Slightly darker green */
   transform: scale(1);
+}
+
+.login-error-message {
+  color: rgb(246, 252, 138);
+  background-color: #d31010;
+  font-weight: bold;
+  padding: 0.019px;
+  border-radius: 20px;
+  margin-left: 100px;
+  margin-top: 10px;
+  width: 300px;
+  text-align: center;
 }

@@ -31,11 +31,12 @@ export default function TeacherPoll() {
 
   // Decode the JWT token to get teacher's name
   const decodeToken = () => {
+
     const token = localStorage.getItem("token");
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setTeacherName(decoded.name || decoded.username || "Unknown Teacher");
+        setTeacherName(decoded.name || "Unknown Teacher");
       } catch (error) {
         console.error("Error decoding token:", error);
       }

@@ -12,7 +12,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-
+  const [error, setError] = useState("");  // New error state to store error messages
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -25,6 +25,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");  // Reset error before each submission
 
     try {
       const response = await fetch("/api/register", {
@@ -40,19 +41,18 @@ const LoginForm = () => {
         alert("🎉 Login successful! Welcome back!");
         localStorage.setItem("token", data.token);
         
-        if(data.role === "Member"){
+        if (data.role === "Member") {
           router.push("/teacher");
-        }
-        else{
+        } else {
           router.push("/admin");
         }
       } else {
         const errorData = await response.json();
-        alert(`⚠️ Failed to log in: ${errorData.message}`);
+        setError(`⚠️ Failed to log in: Invalid Credentials`);  // Set error message
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("❌ An error occurred. Please try again.");
+      setError("❌ An error occurred. Please try again.");  // Set error message
     }
   };
 
@@ -62,7 +62,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <AllLandingHeader/>
+      <AllLandingHeader />
       <div className="login-container">
         <div className="login-box">
           <h1 className="login-title">🔑 Log In to Your Account</h1>
@@ -98,6 +98,13 @@ const LoginForm = () => {
             </div>
             <button type="submit" className="login-submit-button">🚀 Log In</button>
           </form>
+
+          {error && (
+            <div className="login-error-message">
+              <p>{error}</p>  {/* Render the error message here */}
+            </div>
+          )}
+
           <div className="login-register-link">
             <p className="login-register-text">
               Don’t have an account? 🤷‍♂️{" "}
@@ -113,7 +120,6 @@ const LoginForm = () => {
         </div>
       </div>
     </>
-    
   );
 };
 

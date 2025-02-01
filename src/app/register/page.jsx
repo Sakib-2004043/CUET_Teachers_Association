@@ -17,6 +17,8 @@ const SignUpForm = () => {
     profileImage: null,
   });
   const [imagePreview, setImagePreview] = useState(null);
+  const [message, setMessage] = useState(null); // State for success/error message
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +33,7 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage(null); // Reset message before submission
 
     const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -44,20 +47,26 @@ const SignUpForm = () => {
       });
 
       if (response.ok) {
-        alert('Registration successful!');
-        router.push('/login');
+        setMessage('Registration successful! Redirecting to login...');
+        setMessageType('success');
+
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000); // Redirect after 2 seconds
       } else {
-        alert('Failed to register. Please try again.');
+        setMessage('Failed to register. Please try again.');
+        setMessageType('error');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred during registration.');
+      setMessage('An error occurred during registration.');
+      setMessageType('error');
     }
   };
 
   return (
     <div>
-      <AllLandingHeader/>
+      <AllLandingHeader />
       <div className="sign-up-form-container">
         <div className="sign-up-form-box">
           <h1 className="sign-up-header-title">Welcome to CUET Teacher's Association</h1>
@@ -121,6 +130,7 @@ const SignUpForm = () => {
               type="file"
               name="profileImage"
               accept="image/*"
+              placeholder="Profile Image"
               onChange={handleFileChange}
               className="sign-up-input-file"
               required
@@ -135,14 +145,18 @@ const SignUpForm = () => {
             <button type="submit" className="sign-up-button-submit">
               Sign Up
             </button>
+
+            {/* Display success or error message here */}
+            {message && (
+              <p className={`sign-up-message ${messageType}`}>
+                {message}
+              </p>
+            )}
           </form>
           <div className="sign-up-login-link">
             <p>
               Already have an account?{' '}
-              <Link
-                href={"/login"}
-                className="sign-up-login-button"
-              >
+              <Link href="/login" className="sign-up-login-button">
                 Login here
               </Link>
             </p>
@@ -150,7 +164,6 @@ const SignUpForm = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 

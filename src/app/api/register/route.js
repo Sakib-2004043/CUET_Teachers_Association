@@ -49,7 +49,7 @@ export async function POST(req) {
 
     // Return success response
     return NextResponse.json(
-      { message: "User registered successfully", data: savedUser },
+      { message: "User registered successfully" },
       { status: 201 }
     );
   } catch (error) {
