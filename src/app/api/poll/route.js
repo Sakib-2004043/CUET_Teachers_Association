@@ -75,7 +75,7 @@ export async function POST(req) {
     // Return a success response
     return NextResponse.json(
       { message: "Poll created successfully.", poll: savedPoll },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error creating poll:", error);

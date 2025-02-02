@@ -1,8 +1,14 @@
-"use client";
+'use client';
+
 import React, { useState, useEffect } from "react";
 import "./poll.css";
 import { formatDate } from "@/utils/dateFormat";
 import { setNotification } from "@/utils/notification";
+import dynamic from "next/dynamic";
+
+const LOADING_MESSAGE = `Loading Polls...`;
+const ERROR_MESSAGE = `An error occurred while fetching the polls.`;
+const NO_POLLS_MESSAGE = `No polls available.`;
 
 const CreatePoll = () => {
   const [title, setTitle] = useState(""); // Poll title
@@ -10,19 +16,29 @@ const CreatePoll = () => {
   const [lastDate, setLastDate] = useState(""); // Poll deadline
   const [status, setStatus] = useState("open"); // Poll status
   const [polls, setPolls] = useState([]); // State to store all polls
-  const [selectedPoll, setSelectedPoll] = useState(null); // State for selected poll details
+  const [selectedPoll, setSelectedPoll] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // Fetch all polls from the API
   const fetchPolls = async () => {
+    setLoading(true);
     try {
       const response = await fetch("/api/poll");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      setPolls(data.polls);
+
+      // Sort polls in descending order by createDate
+      const sortedPolls = data.polls.sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
+
+      setPolls(sortedPolls);
     } catch (error) {
       console.error("Error fetching polls:", error);
+      setError(ERROR_MESSAGE);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,14 +49,15 @@ const CreatePoll = () => {
   // Handle form submission for creating a new poll
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const pollData = {
       title,
       description,
       lastDate,
       status,
+      createDate: new Date().toISOString(), // Add createDate field
     };
-
+  
     try {
       const response = await fetch("/api/poll", {
         method: "POST",
@@ -49,22 +66,32 @@ const CreatePoll = () => {
         },
         body: JSON.stringify(pollData),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const data = await response.json();
-      await setNotification("teachersNotification")
-      fetchPolls(); // Refresh the list of polls after creation
+  
+      const newPoll = await response.json();
+  
+      // Instantly update the polls state and sort it in descending order
+      setPolls((prevPolls) =>
+        [pollData, ...prevPolls].sort((a, b) => new Date(b.createDate) - new Date(a.createDate))
+      );
+  
+      // Reset form fields
       setTitle("");
       setDescription("");
       setLastDate("");
       setStatus("open");
+  
+      await setNotification("teachersNotification");
+  
     } catch (error) {
       console.error("Error creating poll:", error);
     }
   };
+  
+  
 
   // Handle view details button click
   const handleViewDetails = (poll) => {
@@ -73,13 +100,10 @@ const CreatePoll = () => {
 
   return (
     <div className="admin-poll-container">
-      {/* Container for the three sections */}
       <div className="admin-poll-layout">
-        {/* Create Poll Section */}
         <div className="admin-poll-section poll-create">
           <h1 className="admin-poll-title">Create a New Poll</h1>
           <form className="admin-poll-form" onSubmit={handleSubmit}>
-            {/* Poll Title */}
             <div className="admin-poll-field">
               <label htmlFor="title" className="admin-poll-label">
                 Poll Title:
@@ -94,7 +118,6 @@ const CreatePoll = () => {
                 required
               />
             </div>
-            {/* Poll Description */}
             <div className="admin-poll-field">
               <label htmlFor="description" className="admin-poll-label">
                 Poll Description:
@@ -108,7 +131,6 @@ const CreatePoll = () => {
                 required
               />
             </div>
-            {/* Poll Last Date */}
             <div className="admin-poll-field">
               <label htmlFor="lastDate" className="admin-poll-label">
                 Poll Deadline:
@@ -122,7 +144,6 @@ const CreatePoll = () => {
                 required
               />
             </div>
-            {/* Poll Status */}
             <div className="admin-poll-field">
               <label htmlFor="status" className="admin-poll-label">
                 Poll Status:
@@ -137,144 +158,42 @@ const CreatePoll = () => {
                 <option value="closed">Closed</option>
               </select>
             </div>
-            {/* Submit Button */}
             <button type="submit" className="admin-poll-submit">
               Create Poll
             </button>
           </form>
         </div>
 
-        {/* All Polls Section */}
         <div className="admin-poll-section admin-poll-list">
           <h2 className="admin-poll-subtitle">All Polls</h2>
           <div className="admin-poll-scrollable">
-            {polls.length > 0 ? (
+            {loading ? (
+              <p className="admin-poll-loading">{LOADING_MESSAGE}</p>
+            ) : error ? (
+              <p className="admin-poll-error">{ERROR_MESSAGE}</p>
+            ) : polls.length > 0 ? (
               <ul className="admin-poll-items">
                 {polls.map((poll) => (
                   <li key={poll._id} className="admin-poll-item">
                     <h3 className="admin-poll-item-title">{poll.title}</h3>
-                    <p className="admin-poll-item-description">
-                      {poll.description}
-                    </p>
-                    <p className="admin-poll-item-date">
-                      Deadline: {formatDate(poll.lastDate)}
-                    </p>
-                    <p className={`admin-poll-item-status ${poll.status}`}>
-                      Status: {poll.status}
-                    </p>
-                    <button
-                      className="admin-poll-view-details"
-                      onClick={() => handleViewDetails(poll)}
-                    >
+                    <p className="admin-poll-item-description">{poll.description}</p>
+                    <p className="admin-poll-item-date">Deadline: {formatDate(poll.lastDate)}</p>
+                    <p className={`admin-poll-item-status ${poll.status}`}>Status: {poll.status}</p>
+                    <button className="admin-poll-view-details" onClick={() => handleViewDetails(poll)}>
                       View Details
                     </button>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="admin-poll-empty">No polls available.</p>
+              <p className="admin-poll-empty">{NO_POLLS_MESSAGE}</p>
             )}
           </div>
         </div>
-
-        {/* Poll Details Section */}
-        <div className="admin-poll-section admin-poll-details">
-          <h2 className="admin-poll-details-title">Poll Details</h2>
-          <div className="admin-poll-scrollable">
-            {selectedPoll ? (
-              <>
-                {/* First Table: Poll Attributes */}
-                <table className="admin-poll-table">
-                  <thead className="admin-poll-table-head">
-                    <tr className="admin-poll-table-row">
-                      <th className="admin-poll-table-header">Attribute</th>
-                      <th className="admin-poll-table-header">Details</th>
-                    </tr>
-                  </thead>
-                  <tbody className="admin-poll-table-body">
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Title</td>
-                      <td className="admin-poll-table-cell">{selectedPoll.title}</td>
-                    </tr>
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Description</td>
-                      <td className="admin-poll-table-cell">{selectedPoll.description}</td>
-                    </tr>
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Deadline</td>
-                      <td className="admin-poll-table-cell">
-                        {formatDate(selectedPoll.lastDate)}
-                      </td>
-                    </tr>
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Status</td>
-                      <td className="admin-poll-table-cell">{selectedPoll.status}</td>
-                    </tr>
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Agreed Votes</td>
-                      <td className="admin-poll-table-cell">
-                        {selectedPoll.yesVote ? selectedPoll.yesVote.length : 0}
-                      </td>
-                    </tr>
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">Disagreed Votes</td>
-                      <td className="admin-poll-table-cell">
-                        {selectedPoll.noVote ? selectedPoll.noVote.length : 0}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                {/* Second Table: Vote Details */}
-                <h4 className="admin-poll-vote-heading">Vote Details</h4>
-                <table className="admin-poll-table">
-                  <thead className="admin-poll-table-head">
-                    <tr className="admin-poll-table-row">
-                      <th className="admin-poll-table-header">Agreed (Yes Votes)</th>
-                      <th className="admin-poll-table-header">Disagreed (No Votes)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="admin-poll-table-body">
-                    <tr className="admin-poll-table-row">
-                      <td className="admin-poll-table-cell">
-                        <ul className="admin-poll-vote-list">
-                          {selectedPoll.yesVote && selectedPoll.yesVote.length > 0 ? (
-                            selectedPoll.yesVote.map((vote, index) => (
-                              <li key={index} className="admin-poll-vote-item">
-                                {vote}
-                              </li>
-                            ))
-                          ) : (
-                            <li className="admin-poll-vote-item">No votes</li>
-                          )}
-                        </ul>
-                      </td>
-                      <td className="admin-poll-table-cell">
-                        <ul className="admin-poll-vote-list">
-                          {selectedPoll.noVote && selectedPoll.noVote.length > 0 ? (
-                            selectedPoll.noVote.map((vote, index) => (
-                              <li key={index} className="admin-poll-vote-item">
-                                {vote}
-                              </li>
-                            ))
-                          ) : (
-                            <li className="admin-poll-vote-item">No votes</li>
-                          )}
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </>
-            ) : (
-              <p className="admin-poll-empty-message">Select a poll to view details.</p>
-            )}
-          </div>
-        </div>
-
       </div>
     </div>
   );
 };
 
-export default CreatePoll;
+export default dynamic(() => Promise.resolve(CreatePoll), { ssr: false });
+//export default CreatePoll
