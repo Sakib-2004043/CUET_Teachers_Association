@@ -204,7 +204,7 @@ const Profile = () => {
                       <strong>Date:</strong> {formatDate(complain.date)}
                     </p>
                     <p className="teacher-profile-complaint-text">
-                      <strong>Complaint:</strong><hr /> {complain.complain}
+                      <strong>Complaint:</strong> {complain.complain}
                     </p>
                   </div>
 
@@ -212,7 +212,7 @@ const Profile = () => {
                   {complain.reply && (
                     <div className="teacher-profile-reply-card">
                       <p className="teacher-profile-reply-text">
-                        <strong>Reply:</strong><hr /> {complain.reply}
+                        <strong>Reply:</strong> {complain.reply}
                       </p>
                     </div>
                   )}

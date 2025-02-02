@@ -10,7 +10,7 @@ test.describe('TeacherPoll Component Tests', () => {
     page = await context.newPage();
     
     // Set mock token in localStorage
-    await page.goto('http://localhost:3000/teacher/poll'); // Navigate to domain first
+    await page.goto('/teacher/poll'); // Navigate to domain first
     await page.evaluate(() => {
       localStorage.setItem('token', 'fake-token');
     });
@@ -47,7 +47,7 @@ test.describe('TeacherPoll Component Tests', () => {
       });
     });
 
-    await page.goto('http://localhost:3000/teacher/poll');
+    await page.goto('/teacher/poll');
   });
 
   test.afterAll(async () => {

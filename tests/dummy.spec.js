@@ -1,137 +1,124 @@
-// tests/profile.spec.js
 const { test, expect } = require('@playwright/test');
 
-test.describe('Profile Component Tests', () => {
-  let page;
-  let context;
+const API_ENDPOINT = '/api/profile';
+const LOADING_MESSAGE = 'Loading teachers...';
+const ERROR_MESSAGE = 'An error occurred while fetching the teachers\' data.';
+const NO_TEACHERS_MESSAGE = 'No teachers found.';
+const SEARCH_PLACEHOLDER = 'input[placeholder="Search by any field..."]';
 
-  test.beforeAll(async ({ browser }) => {
-    // Create context with localStorage enabled
-    context = await browser.newContext();
-    page = await context.newPage();
-
-    // Set mock token in localStorage
-    await page.goto('http://localhost:3000/teacher/profile');
-    await page.evaluate(() => {
-      localStorage.setItem('token', 'fake-token');
-    });
+test.describe('TeachersList Component Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/admin/allTeacher');
   });
 
-  test.beforeEach(async () => {
-    // Mock API responses
-    await page.route('/api/profile', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          name: 'John Doe',
-          email: 'john@example.com',
-          role: 'Member',
-          department: 'Computer Science',
-          mobile: '123-456-7890',
-          profileImage: null
-        })
-      });
+  test.afterEach(async ({ page }) => {
+    await page.unroute(API_ENDPOINT);
+  });
+
+  test.describe('API Data Fetching', () => {
+    test('Displays loading message while fetching data', async ({ page }) => {
+      await expect(page.locator(`text=${LOADING_MESSAGE}`)).toBeVisible();
     });
 
-    await page.route('/api/complain', async route => {
-      if (route.request().method() === 'PUT') {
-        await route.fulfill({
+    test('Displays error message when data fetch fails', async ({ page }) => {
+      await page.route(API_ENDPOINT, route => {
+        route.fulfill({
+          status: 500,
+          contentType: 'application/json',
+          body: JSON.stringify({ message: 'Internal server error' }),
+        });
+      });
+
+      await page.reload();
+
+      await expect(page.locator(`text=${ERROR_MESSAGE}`)).toBeVisible();
+    });
+
+    test('Displays teacher data after successful fetch', async ({ page }) => {
+      await page.route(API_ENDPOINT, route => {
+        route.fulfill({
           status: 200,
           contentType: 'application/json',
           body: JSON.stringify({
-            complaints: [
-              {
-                date: new Date().toISOString(),
-                complain: 'Test complaint 1',
-                reply: 'Test reply 1'
-              },
-              {
-                date: new Date(Date.now() - 86400000).toISOString(),
-                complain: 'Test complaint 2',
-                reply: null
-              }
-            ]
-          })
+            Data: [
+              { _id: '1', name: 'John Doe', email: 'john.doe@example.com', department: 'Math', mobile: '123-456-7890', role: 'Member' },
+              { _id: '2', name: 'Jane Smith', email: 'jane.smith@example.com', department: 'Science', mobile: '987-654-3210', role: 'Admin' },
+            ],
+          }),
         });
-      }
+      });
+
+      await page.reload();
+
+      await expect(page.locator('text=John Doe')).toBeVisible();
+      await expect(page.locator('text=Jane Smith')).toBeVisible();
     });
-
-    await page.goto('http://localhost:3000/teacher/profile');
   });
 
-  test.afterAll(async () => {
-    await context.close();
-  });
-
-  test('should render profile page correctly', async () => {
-    // Verify main elements
-    await expect(page.getByRole('heading', { name: 'Teacher Profile' })).toBeVisible();
-    await expect(page.getByText('Go To Home')).toBeVisible();
-    await expect(page.getByRole('img', { name: 'Profile' })).toBeVisible();
-    await expect(page.getByPlaceholder('Enter your complaint here...')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Submit Complaint' })).toBeVisible();
-  });
-
-  test('should display user profile information correctly', async () => {
-    // Verify profile details
-    await expect(page.getByText('John Doe')).toBeVisible();
-    await expect(page.getByText('john@example.com')).toBeVisible();
-    await expect(page.getByText('Professor')).toBeVisible();
-    await expect(page.getByText('Computer Science')).toBeVisible();
-    await expect(page.getByText('123-456-7890')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
-  });
-
-  test('should display previous complaints correctly', async () => {
-    // Verify complaints section
-    await expect(page.getByText('Previous Complaints')).toBeVisible();
-    
-    // Check complaint items
-    const complaints = page.locator('.teacher-profile-complaint-item');
-    await expect(complaints).toHaveCount(2);
-    
-    // Verify first complaint with reply
-    await expect(page.getByText('Test complaint 1')).toBeVisible();
-    await expect(page.getByText('Test reply 1')).toBeVisible();
-    
-    // Verify second complaint without reply
-    await expect(page.getByText('Test complaint 2')).toBeVisible();
-  });
-
-  test('should handle complaint submission', async () => {
-    // Mock POST request for complaint submission
-    await page.route('/api/complain', async route => {
-      if (route.request().method() === 'POST') {
-        await route.fulfill({
+  test.describe('Search Functionality', () => {
+    test('Search functionality filters teachers correctly', async ({ page }) => {
+      await page.route(API_ENDPOINT, route => {
+        route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({})
+          body: JSON.stringify({
+            Data: [
+              { _id: '1', name: 'John Doe', email: 'john.doe@example.com', department: 'Math', mobile: '123-456-7890', role: 'Member' },
+              { _id: '2', name: 'Jane Smith', email: 'jane.smith@example.com', department: 'Science', mobile: '987-654-3210', role: 'Admin' },
+            ],
+          }),
         });
-      }
+      });
+
+      await page.reload();
+
+      await page.locator(SEARCH_PLACEHOLDER).fill('john');
+
+      await expect(page.locator('text=John Doe')).toBeVisible();
+      await expect(page.locator('text=Jane Smith')).not.toBeVisible();
     });
 
-    // Fill and submit complaint
-    await page.getByPlaceholder('Enter your complaint here...').fill('New test complaint');
-    await page.getByRole('button', { name: 'Submit Complaint' }).click();
-    
-    // Verify success
-    await expect(page.getByText('Complaint submitted successfully!')).toBeVisible();
+    test('Displays message when no teachers match the search query', async ({ page }) => {
+      await page.route(API_ENDPOINT, route => {
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            Data: [
+              { _id: '1', name: 'John Doe', email: 'john.doe@example.com', department: 'Math', mobile: '123-456-7890', role: 'Member' },
+              { _id: '2', name: 'Jane Smith', email: 'jane.smith@example.com', department: 'Science', mobile: '987-654-3210', role: 'Admin' },
+            ],
+          }),
+        });
+      });
+
+      await page.reload();
+
+      await page.locator(SEARCH_PLACEHOLDER).fill('nonexistent');
+
+      await expect(page.locator(`text=${NO_TEACHERS_MESSAGE}`)).toBeVisible();
+    });
   });
 
-  test('should show fallback profile image', async () => {
-    const profileImage = page.locator('.teacher-profile-img');
-    await expect(profileImage).toHaveAttribute('src', /use\.jpg/);
-  });
+  test.describe('Profile Images', () => {
+    test('Handles teacher profile images correctly', async ({ page }) => {
+      await page.route(API_ENDPOINT, route => {
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            Data: [
+              { _id: '1', name: 'John Doe', profileImage: 'base64-image-string' },
+              { _id: '2', name: 'Jane Smith', profileImage: '' },
+            ],
+          }),
+        });
+      });
 
-  test('should handle navigation', async () => {
-    // Test Edit button
-    await page.getByRole('button', { name: 'Edit' }).click();
-    await expect(page).toHaveURL(/\/teacher\/edit/);
-    await page.goBack();
+      await page.reload();
 
-    // Test Home link
-    await page.getByRole('link', { name: 'Go To Home' }).click();
-    await expect(page).toHaveURL(/\/teacher/);
+      await expect(page.locator('img[alt="John Doe\'s profile"]')).toBeVisible();
+      await expect(page.locator('text=No Image')).toBeVisible();
+    });
   });
 });
