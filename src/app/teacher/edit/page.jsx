@@ -4,6 +4,7 @@ import Link from "next/link";
 import { jwtDecode } from "jwt-decode"; // Ensure you have this library installed
 import "./edit.css";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 const Edit = () => {
   const [render, setRender] = useState(false);
@@ -273,4 +274,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default dynamic(() => Promise.resolve(Edit), { ssr: false });

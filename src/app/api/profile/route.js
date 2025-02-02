@@ -22,7 +22,7 @@ export async function GET(req) {
 
     // Return the user data (excluding sensitive information like password)
     return NextResponse.json(
-      { "Data": user},
+      { Data: user },
       { status: 200 }
     );
   } catch (error) {
